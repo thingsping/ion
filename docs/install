@@ -1,0 +1,36 @@
+####################
+# Installation and deployment 
+#################
+
+a) apt install python-pip3
+a) pip3 install flask 
+b) sudo apt install python3-flask
+c) pip3 install requests
+d) sudo apt install mongodb
+d) pip3 install pymongo 
+    on PI -  pip3 install pymongo==3.2
+e) pip3 install pyrebase
+f) pip3 install pyOpenSSL
+g) pip3 install schedule 
+h) pip3 install psutil
+
+
+=============
+Create Firebase service.json file
+============
+First create the required db in Firebase
+click on project settings -> service accounts
+Generate new private key. 
+WHen it asks to save, give the appropriate name (eg. service.json)
+
+
+
+=== 
+Setting up ion server with apache
+====
+
+
+==== Flask wsgi
+TBD (some parts are available in old copy of docs)
+
+
