@@ -2,6 +2,10 @@
 # Installation and deployment 
 #################
 
+1. Install any 64 bit linux server. In our case, we have used ubuntu. If you want to setup using raspberry pi, then the normal rasbpian image will not work. MongoDb requires 64 bit and raspbian only has a 32 bit image. For this you will have to get a raspberry pi with a 64 bit image on it. 
+
+2. Install the following packages: 
+
 a) apt install python-pip3
 a) pip3 install flask 
 b) sudo apt install python3-flask
@@ -18,6 +22,7 @@ h) pip3 install psutil
 =============
 Create Firebase service.json file
 ============
+Note : This step is optional and is only required if you include firebase realtime database support in your server installation. 
 First create the required db in Firebase
 click on project settings -> service accounts
 Generate new private key. 
@@ -28,6 +33,7 @@ WHen it asks to save, give the appropriate name (eg. service.json)
 === 
 Setting up ion server with apache
 ====
+TBD
 
 
 ==== Flask wsgi
