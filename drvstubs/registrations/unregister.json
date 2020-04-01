@@ -1,0 +1,24 @@
+[
+ {
+ "regdata" : {      
+    "Type": "Register", "Expires" : 3600,
+    "From" : "10.1.1.18", 
+    "Nid" : "Idev1", 
+    "Key" : "keyIdev1", 
+    "Mid" : "Idev1_001",
+    "Time" : "$time"
+ }
+},
+ {
+ "regdata" :   {
+        "Type": "Register", 
+        "Expires" : 0,
+        "From" : "10.1.1.18", 
+        "Nid" : "Idev1", 
+        "Key" : "keyIdev1", 
+        "Mid" : "Idev1_002",
+        "Time" : "$time"
+
+    }, "exp" : ["DBNOREGFOUND", "RESPEXPIRES", "TYPE200"]
+ }
+]

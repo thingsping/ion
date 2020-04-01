@@ -90,7 +90,6 @@ def receive():
     except json.decoder.JSONDecodeError as je :
       print(je)
       abort(400)
-  
 
   #clientip = request.environ['REMOTE_ADDR']
   headers = request.headers 

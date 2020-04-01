@@ -71,26 +71,23 @@ class Registrar():
           dbdict[HDR_FROM] = self._regdict[HDR_FROM]
           dbdict[DBHDR_DEVID] = self._regdict[HDR_DEVID]
           dbdict[HDR_MSGID] = self._regdict[HDR_MSGID]
-          dbdict[HDR_KEY] = self._regdict[HDR_KEY]
+          dbdict[HDR_KEY] = self._regdict[HDR_KEY]          
           dbdict[HDR_EXPIRES] = req_time + self._expires
-
+          
+          # Run checks to see if expires is in the correct range.
+          # for now just assume it is :-)
+          self._status[HDR_EXPIRES] = self._expires
 
           ''' 
-          #Actually delete all previous registrations for this
-          #device id. Before we were only deleting those with a different
-          #message id. 
-          #First delete any entries for the same Device ID but with a 
-          # different message ID. 
-          filter = { "$and" : [ {DBHDR_DEVID : dbdict[DBHDR_DEVID]}, 
-            { HDR_MSGID : {"$ne": dbdict[HDR_MSGID]}} ] } 
+          #Delete all previous registrations for this device id.  
           '''
           filter = {DBHDR_DEVID : dbdict[DBHDR_DEVID]}
           DBManager.delete_many(DB_REGS_COLN, filter)
-          
-          print ("Creating/updating entry in the registration db - %s" 
-              %(dbdict[DBHDR_DEVID]))
-          filter = {HDR_MSGID : dbdict[HDR_MSGID]}
-          DBManager.replace_one(DB_REGS_COLN, dbdict, filter)
+          if (self._expires != 0):
+            print ("Creating/updating entry in the registration db - %s" 
+                %(dbdict[DBHDR_DEVID]))
+            filter = {HDR_MSGID : dbdict[HDR_MSGID]}
+            DBManager.replace_one(DB_REGS_COLN, dbdict, filter)
         else :
           self._status[HDR_TYPE] = EXCP_UNAUTH_CODE
           self._status[HDR_RESPONSECLAUSE] = EXCP_UNAUTH_FIN
