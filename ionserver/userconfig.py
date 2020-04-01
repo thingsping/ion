@@ -23,7 +23,7 @@ except :
     from constants import * 
 
 config = {
-    CKEY_DBNAME : "qantomion",
+    CKEY_DBNAME : "mysiteion",
     CKEY_MODULENAME : "ionserver", 
     CKEY_SELF_IP : "put_server_address_here",
     CKEY_BASEPATH : "/var/www/html/ionserver", 

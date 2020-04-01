@@ -81,7 +81,7 @@ TYPE_DELETESTALE = "DELETESTALE"
 TYPE_LOG = "LOG"
 
 ## DB constants
-GLOBAL_DB_NAME = "ion"
+GLOBAL_DB_NAME = "thingspingion"
 
 DB_CREDS_COLN = "credentials"
 DB_REGS_COLN = "registrations"
