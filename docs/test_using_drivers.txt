@@ -1,0 +1,43 @@
+There are various drivers / stubs in the drvstubs directory. 
+These are used to simulate IONMP compliant end points to work with our ion server 
+
+ION server should be running on some machine (it could be the same machine as 
+the test machine. )
+
+=========================
+1. createcredentials.py:
+=========================
+        
+run python3 createcredentials.py. 
+
+Will create credentials for input devices idev1 to idev8
+and output devices odev1 to odev8. 
+These credentials are directly inserted into the database. 
+
+
+================================
+2. test_registrations.py
+================================
+Open the file test_registrations.py and change the value of 
+    srv_addr="http://172.21.20.106:5000"
+
+to 
+    srv_addr=<your_servers_ip:port>
+
+    run python test_registrations.py
+
+    This will create registrations for the entities created using the previous
+    createcredentials script. 
+    This will also try to register with bad credentials and try to register
+     entites which are not known to the server and cheks the test results
+     prints a summary of the test results in the end. 
+
+
+
+
+
+
+
+====================================
+3.  
+====================================

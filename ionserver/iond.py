@@ -78,11 +78,20 @@ def receive():
   global lastespprinttime
 
   retstring = "" 
-
+  #print(format(request.data))
   if not request.json:    
     print ("Incoming data = {}".format(request.data))
     abort(400)  
   msg = request.json
+  if (isinstance(msg, str)):
+    print ("Incoming http is string coded! Try to convert...")
+    try : 
+      msg = json.loads(msg)
+    except json.decoder.JSONDecodeError as je :
+      print(je)
+      abort(400)
+  
+
   #clientip = request.environ['REMOTE_ADDR']
   headers = request.headers 
   #print(headers)
