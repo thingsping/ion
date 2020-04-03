@@ -39,7 +39,7 @@ The file is a json file whose content is an array of json elements. The test utl
 Each json element has one or more of the following keys:
 
 - **iondata** : A json element which represents the ION message that has to be sent to the server. 
-- <details>
+ - <details>
            <summary>Sample data for registration</summary>
            <pre>
               "iondata" : {      
