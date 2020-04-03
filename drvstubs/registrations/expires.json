@@ -1,13 +1,13 @@
 [
     { 
-    "regdata" : {  "Type": "Register", 
+    "iondata" : {  "Type": "Register", 
         "Expires" : 1000,   "From" : "10.1.1.18", "Nid" : "Idev1",  "Key" : "keyIdev1", 
         "Mid" : "Idev1_002", "Time" : "$time"
     },  
       "exp" : ["DBEXPIRES", "RESPEXPIRES", "TYPE200"]
     }, 
     { 
-        "regdata" : {  "Type": "Register", 
+        "iondata" : {  "Type": "Register", 
             "Expires" : 300,   "From" : "10.1.1.18", "Nid" : "Idev1",  "Key" : "keyIdev1", 
             "Mid" : "Idev1_003", "Time" : "$time"
         },  

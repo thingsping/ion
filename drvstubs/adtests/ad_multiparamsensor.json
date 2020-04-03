@@ -1,0 +1,16 @@
+{
+    "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.102",
+    "Nid" : "Idev100", 
+    "Mid" : "Idev100_1", 
+    "Time" : 55343213711, 
+    "Key" : "keyIdev100", 
+    "Data" : [{  
+        "Name" : "MagicSensor", "NodeType" : "Sensor", 
+        "Location" : "Hall",
+        "Capabilities" :["A lot"], 
+        "Return" : {
+            "Temperature" : "Float", "Humidity" : "Float", "Wind direction" : "Str",
+            "Friendly name" : "Str", "Is insanity?" : "Boolean", "Dayofweek" : "Int" 
+            }
+        }]
+}

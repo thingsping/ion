@@ -1,6 +1,6 @@
 [
  {
- "regdata" : {      
+ "iondata" : {      
     "Type": "Register", "Expires" : 3600,
     "From" : "10.1.1.18", 
     "Nid" : "Idev1", 
@@ -10,7 +10,7 @@
  }
 },
  {
- "regdata" :   {
+ "iondata" :   {
         "Type": "Register", 
         "Expires" : 0,
         "From" : "10.1.1.18", 
