@@ -2,8 +2,6 @@ This folder contains various files which serve two purposes :
    - Create dummy entities and do operations like registrations, advertisements, etc., 
    - Run test scripts
 
-
-
 ### Creating Credentials ###
 The IONMP protocol mandates that only authorized devices are allowed to participate in the comminication. For this to happen, the server needs to know about such authorized participants. In the current version, we do not have a UI for adding these authorized entities. Instead these values have to be added directly to the database. 
 
@@ -64,11 +62,11 @@ Each json element has one or more of the following keys:
     - RESPEXPIRES - In this case, it checks whether the Expires parameter of the server's response matches the Expires parameter specified in "iondata"
     - TYPEXYZ - Here XYZ is a number that represents the status message sent back in the "Type" field of the response. For example, if the field is set to TYPE200, then the utility verifies whether the response has its Type field set to 200. 
 
-The element could also be an array of JSON elements. The keys of the JSON is as follows:
+    The element could also be an array of JSON elements. The keys of the JSON is as follows:
     - Verify - The value of the Verify key will be a JSON which in turn has a Key value pair. 
     The test utility will check if the server's response has a key-value pair which matches the key-value specified in the **Verify** key. 
 
-     - <details>
+    - <details>
            <summary>Sample Verify for advertisement</summary>
            <pre>
             {
