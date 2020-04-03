@@ -1,0 +1,46 @@
+[
+  {
+    "iondata" : {      
+       "Type": "Register", 
+       "Expires" : 3600,
+       "From" : "10.1.1.18", 
+       "Nid" : "Idev1", 
+       "Key" : "keyIdev1", 
+       "Mid" : "Idev1_001",
+       "Time" : "$time"
+    }
+  }, 
+  { 
+    "iondata" : {
+    "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.18",
+    "Nid" : "Idev1", 
+    "Mid" : "Idev1_001", 
+    "Time" : "$time", 
+    "Key" : "keyIdev1", 
+    "Data" : [{  
+            "Name" : "String Param Tester", "NodeType" : "OutputDevice", 
+            "Location" : "Bedroom",
+            "Action" : "Test String",
+            "Parameters" : {"Sample" : "Str"}
+          }]
+    }
+  }, 
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "String Param Tester",  "Sample" : "Alphabets" }]        
+    }
+  },
+  {
+      "iondata" : {
+        "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+        "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
+        "Key" : "localhostkey", "Name" : "String Param Tester", "Location" : "Bedroom"
+    }, 
+      "exp" : [{
+        "Verify" : {"Type": 200, "Time": "$rtime", "Data": {"Sample" : "Alphabets"}}
+      }]
+  }
+]

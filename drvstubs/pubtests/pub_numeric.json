@@ -1,0 +1,47 @@
+[
+  {
+    "iondata" : {      
+       "Type": "Register", "Expires" : 3600,
+       "From" : "10.1.1.18", 
+       "Nid" : "Idev1", 
+       "Key" : "keyIdev1", 
+       "Mid" : "Idev1_001",
+       "Time" : "$time"
+    }
+  }, 
+  { 
+    "iondata" : {
+    "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.18",
+    "Nid" : "Idev1", 
+    "Mid" : "Idev1_001", 
+    "Time" : "$time", 
+    "Key" : "keyIdev1", 
+    "Data" : [{ 
+       "Name" : "floattester", "NodeType" : "Sensor", 
+        "Location" : "myroom",
+        "Capabilities" :["capabilities"],
+        "Return" : {
+            "myparam" : "Float"
+          }
+       }]
+    }
+  }, 
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "floattester",  "myparam" : 32.2 }]
+    }
+  },
+  {
+      "iondata" : {
+         "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+         "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
+         "Key" : "localhostkey", "Name" : "floattester", "Location" : "myroom"
+      }, 
+      "exp" : [{
+        "Verify" : {"Type": 200, "Time": "$rtime", "Data": {"myparam" : 32.2}}
+      }]
+  }
+]

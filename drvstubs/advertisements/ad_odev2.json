@@ -1,0 +1,14 @@
+{
+    "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.202",
+    "Nid" : "Odev2", 
+    "Mid" : "Odev2_1", 
+    "Time" : 55343213711, 
+    "Key" : "keyOdev2", 
+    "Data" : [{  
+        "Name" : "Fan#1", "NodeType" : "OutputDevice", 
+        "Location" : "Hall",
+        "Action" : "Switch",
+        "Capabilities" :["Fan Control"],
+        "Parameters" : {"State" : "Boolean"}
+        }]
+}

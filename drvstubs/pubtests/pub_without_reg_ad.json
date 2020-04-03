@@ -1,0 +1,21 @@
+[ 
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "MotionSensor1",  "MotionDetected" : true }]
+    }, 
+    "exp" : [
+      "TYPE403"
+    ]
+  },
+  {
+      "iondata" : {
+        "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+        "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
+        "Key" : "localhostkey", "Name" : "MotionSensor1", "Location" : "Front door"
+    }, 
+      "exp" : ["TYPE404"]
+  }
+]

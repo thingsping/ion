@@ -1,0 +1,75 @@
+[
+
+  {
+    "meta" : {
+        "Name" : "Device with multiple things ",
+        "Desc" : "This test simulates a scenario where one microcontroller is used to connect to multiple thing. For example, you could use a single microcontroller to control a fan, light and a buzzer"
+    }
+  },
+  {
+    "iondata" : {      
+       "Type": "Register", "Expires" : 3600,
+       "From" : "10.1.1.18", 
+       "Nid" : "Idev1", 
+       "Key" : "keyIdev1", 
+       "Mid" : "Idev1_001",
+       "Time" : "$time"
+    }
+  }, { 
+    "iondata" : {
+    "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.18",
+    "Nid" : "Idev1", 
+    "Mid" : "Idev1_001", 
+    "Time" : "$time", 
+    "Key" : "keyIdev1", 
+    "Data" : [
+          {
+            "Name" : "Light", "NodeType" : "Sensor", 
+            "Location" : "Living",
+            "Return" : {"State" : "Boolean"}
+          },
+          {  
+          "Name" : "Temperature Sensor", "NodeType" : "Sensor", 
+          "Location" : "Hall",
+          "Return" : {"Temperature" : "Float"}
+          }
+      ]
+    }
+  }, 
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "Temperature Sensor",  "Temperature" : 34.1 }]
+    }
+  },
+  {
+      "iondata" : {
+         "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+         "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
+         "Key" : "localhostkey", "Name" : "Temperature Sensor", "Location" : "Hall"
+      }, 
+      "exp" : [{
+        "Verify" : {"Type": 200, "Time": "$rtime", "Data": {"Temperature" : 34.1}}
+      }]
+  },
+  {
+    "iondata" : {
+      "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+      "Nid" : "Idev1", "Mid" : "Idev1005", "Time" : "$time", 
+      "Key" : "keyIdev1", 
+      "Data" : [{ "Name" : "Light",  "State" : false }]
+  }
+},
+{
+    "iondata" : {
+       "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+       "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
+       "Key" : "localhostkey", "Name" : "Light", "Location" : "Living"
+    }, 
+    "exp" : [{
+      "Verify" : {"Type": 200, "Time": "$rtime", "Data": {"State" : false}}
+    }]
+}
+]

@@ -1,0 +1,53 @@
+[
+
+  {
+    "meta" : {
+      "Name" : "A short name",
+      "Desc" : "Detailed description of the test"
+    }
+
+  {
+    "iondata" : {      
+       "Type": "Register", "Expires" : 3600,
+       "From" : "10.1.1.18", 
+       "Nid" : "Idev1", 
+       "Key" : "keyIdev1", 
+       "Mid" : "Idev1_001",
+       "Time" : "$time"
+    }
+  }, { 
+    "iondata" : {
+    "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.18",
+    "Nid" : "Idev1", 
+    "Mid" : "Idev1_001", 
+    "Time" : "$time", 
+    "Key" : "keyIdev1", 
+    "Data" : [{ 
+       "Name" : "<entityname>", "NodeType" : "Sensor", 
+        "Location" : "<location>",
+        "Capabilities" :["capabilities"],
+        "Return" : {
+            "paramname" : "paramdatatype"
+          }
+       }]
+    }
+  }, 
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "<entityname>",  "<paramname>" : <paramvalue> }]
+    }
+  },
+  {
+      "iondata" : {
+         "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+         "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
+         "Key" : "localhostkey", "Name" : "<entityname>", "Location" : "<location>"
+      }, 
+      "exp" : [{
+        "Verify" : {"Type": 200, "Time": "$rtime", "Data": {"<paramname>" : "<expval>"}}
+      }]
+  }
+]

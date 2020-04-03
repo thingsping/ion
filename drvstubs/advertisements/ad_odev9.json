@@ -1,0 +1,15 @@
+{
+    "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.209",
+    "Nid" : "Odev9", 
+    "Mid" : "Odev9_1", 
+    "Time" : 55343213711, 
+    "Key" : "keyOdev9", 
+    "Data" : [{  
+        "Name" : "Right Music Player", "NodeType" : "OutputDevice", 
+        "Location" : "Baby Room",
+        "Action" : "Play",
+        "Capabilities" :["Play Sound"],
+        "Parameters" : {"Sound Track" : "Str"},
+        "Return" : { "State" : "Boolean"}
+        }]
+}

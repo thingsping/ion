@@ -1,0 +1,15 @@
+{
+    "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.204",
+    "Nid" : "Odev4", 
+    "Mid" : "Odev4_1", 
+    "Time" : 55343213711, 
+    "Key" : "keyOdev4", 
+    "Data" : [{  
+        "Name" : "Light#1", "NodeType" : "OutputDevice", 
+        "Location" : "Hall",
+        "Action" : "Switch",
+        "Capabilities" :["Light Control"],
+        "Parameters" : {"State" : "Boolean"},
+        "Return" : { "State" : "Boolean"}
+        }]
+}

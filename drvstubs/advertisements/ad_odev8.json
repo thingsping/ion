@@ -1,0 +1,15 @@
+{
+    "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.208",
+    "Nid" : "Odev8", 
+    "Mid" : "Odev8_1", 
+    "Time" : 55343213711, 
+    "Key" : "keyOdev8", 
+    "Data" : [{  
+        "Name" : "Left Music Player", "NodeType" : "OutputDevice", 
+        "Location" : "Baby Room",
+        "Action" : "Play",
+        "Capabilities" :["Play Sound"],
+        "Parameters" : {"Sound Track" : "Str"},
+        "Return" : { "State" : "Boolean"}
+        }]
+}

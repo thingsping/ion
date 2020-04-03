@@ -1,0 +1,78 @@
+[
+  {
+    "meta" : {
+      "Name" : "Test publish for entity which is capable of sending return values",
+      "Desc" : "In this test, we use a sensor which is capable of reading multiple return values. A classic example is the DHT11/DHT22 sensor which can read both humidity and temperature"
+    }
+
+  }, 
+  {
+    "iondata" : {      
+       "Type": "Register", "Expires" : 3600,
+       "From" : "10.1.1.18", 
+       "Nid" : "Idev1", 
+       "Key" : "keyIdev1", 
+       "Mid" : "Idev1_001",
+       "Time" : "$time"
+    }
+  }, { 
+    "iondata" : {
+    "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.18",
+    "Nid" : "Idev1", 
+    "Mid" : "Idev1_001", 
+    "Time" : "$time", 
+    "Key" : "keyIdev1",     
+    "Data" : [{  "Name" : "MagicSensor", "NodeType" : "Sensor", 
+      "Location" : "Hall",
+      "Capabilities" :["A lot"], 
+      "Return" : {
+          "Temperature" : "Float", "Humidity" : "Float", "Wind direction" : "Str",
+          "Friendly name" : "Str", "Is insanity?" : "Boolean", "Dayofweek" : "Int" 
+          }
+        }]
+    }
+  }, 
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "MagicSensor",  "Temperature" : 32.3, "Humidity" : 50.6, 
+          "Wind directon" : "NW" }]
+    }
+  },
+  {
+      "iondata" : {
+         "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+         "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
+         "Key" : "localhostkey", "Name" : "MagicSensor", "Location" : "Hall"
+      }, 
+      "exp" : [{
+        "Verify" : {"Type": 200, "Time": "$rtime", "Data": {"Temperature" : 32.3, "Humidity" : 50.6, 
+          "Wind directon" : "NW" }}
+      }]
+  },
+  {
+    "sleep" : 2
+  },
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "MagicSensor",  "Friendly name" : "God", "Is insanity?" : false, 
+          "Dayofweek" : 4 }]
+    }
+  },
+  {
+      "iondata" : {
+         "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+         "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
+         "Key" : "localhostkey", "Name" : "MagicSensor", "Location" : "Hall"
+      }, 
+      "exp" : [{
+        "Verify" : {"Type": 200, "Time": "$rtime", "Data": {"Friendly name" : "God", "Is insanity?" : false, 
+          "Dayofweek" : 4}}
+      }]
+  }
+]

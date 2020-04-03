@@ -1,0 +1,15 @@
+{
+    "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.107",
+    "Nid" : "Idev7", 
+    "Mid" : "Idev7_1", 
+    "Time" : 55343213711, 
+    "Key" : "keyIdev7", 
+    "Data" : [{  
+        "Name" : "GasDetector1", "NodeType" : "Sensor", 
+        "Location" : "Kitchen",
+        "Capabilities" :["Detect Gas"],
+        "Return" : {
+            "Gas Detected" : "Boolean"
+          }
+        }]
+}

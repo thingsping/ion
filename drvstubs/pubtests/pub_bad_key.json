@@ -1,0 +1,45 @@
+[
+  {
+    "iondata" : {      
+       "Type": "Register", "Expires" : 3600,
+       "From" : "10.1.1.18", 
+       "Nid" : "Idev1", 
+       "Key" : "keyIdev1", 
+       "Mid" : "Idev1_001",
+       "Time" : "$time"
+    }
+  }, { 
+    "iondata" : {
+    "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.18",
+    "Nid" : "Idev1", 
+    "Mid" : "Idev1_001", 
+    "Time" : "$time", 
+    "Key" : "keyIdev1", 
+    "Data" : [{  
+        "Name" : "MotionSensor1", "NodeType" : "Sensor", 
+        "Location" : "Front door",
+        "Capabilities" :["Detect Motion"],
+        "Return" : {
+            "MotionDetected" : "Boolean"
+          }
+        }]
+    }
+  }, 
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "BadKey",
+        "Data" : [{ "Name" : "MotionSensor1",  "MotionDetected" : true }]
+    }, 
+    "exp" : ["TYPE401"]
+  },
+  {
+      "iondata" : {
+        "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+        "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
+        "Key" : "localhostkey", "Name" : "MotionSensor1", "Location" : "Front door"
+    }, 
+      "exp" : ["TYPE401"]
+  }
+]

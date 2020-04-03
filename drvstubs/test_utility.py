@@ -1,4 +1,4 @@
-import importlib, glob
+import importlib, glob, traceback
 
 importlib.import_module("iontest_helper")
 from iontest_helper import *
@@ -41,7 +41,8 @@ if __name__ == '__main__':
             all_tests()
         elif args.file:
             print("Executing - {}".format(args.file))
-            cur_failures=test_file(args.server, args.file)            
+            cur_failures=test_file(args.server, args.file)       
+            #print(cur_failures)     
             if len(cur_failures) != 0 :
                 failures[args.file] =  cur_failures
         elif args.dir:
@@ -52,8 +53,8 @@ if __name__ == '__main__':
                 cur_failures = test_file(args.server, f)
                 if len(cur_failures) != 0 :
                     failures[f] = cur_failures
-    except Exception as e:
-        print(e)
+    except Exception:
+        traceback.print_exc()
 
     summary = get_results()
     print ("\n========================\n{{ \"Pass\":{}, \"Fail\":{}}}".format(summary[0], summary[1]))

@@ -11,7 +11,7 @@ dbclient = pymongo.MongoClient("mongodb://localhost:27017/")
 db = dbclient[SITEDB]
 coln_reg = db["registrations"]
 coln_ad = db["advertisements"]
-coln_publish = db["publish"]
+coln_publish = db["publisheddata"]
 
 def get_results():
     return (passcount, failcount)
@@ -48,9 +48,12 @@ def delete_keys_from_dict(dict_del, lst_keys):
                 delete_keys_from_dict(dict_del[field], lst_keys)
     return dict_del    
 
-def test_helper(server, regdata, allexpected=None):
+def test_helper(server, regdata, allexpected=None, failures=None):
     global passcount, failcount, rtime
-    failure_msg = []
+    if failures is None:
+        failure_msg = []
+    else :
+        failure_msg = failures
     resp = get_response(server, regdata)
     print (resp)
     if allexpected :
@@ -113,8 +116,15 @@ def test_helper(server, regdata, allexpected=None):
                     if k in resp:
                         reqdrespval = resp[k]
                         if allexcludes is not None: # Remove those keys which we don't care about
-                            reqdrespval = delete_keys_from_dict(reqdrespval, allexcludes)
-                        if (reqdrespval == v):
+                            reqdrespval = delete_keys_from_dict(reqdrespval, allexcludes)                        
+                        if v == "$rtime":                            
+                            v = rtime
+                            if abs(v - reqdrespval) <= 1 : # A grace time of 1 second for rounding/ comversions
+                                passcount = passcount + 1
+                            else :
+                                failcount = failcount + 1
+                                failure_msg.append((v, reqdrespval))
+                        elif reqdrespval == v:
                             passcount = passcount + 1
                         else :
                             failcount = failcount + 1
@@ -166,23 +176,26 @@ def test_from_template(server, reg_tpl_dict, ctr, exp_code, devname, testname=""
 
 
 def test_file(server, regfile):           
-    failures=()
+    failures=[]
     with open(regfile) as json_file:  
         data = json.load(json_file)
         if (type(data) is list):
             for item in data:
+                if ("meta" in item):
+                    print("For future use - {}".format(item))
                 if ("iondata" in item):
                     regdata = item["iondata"]
                     exp = None
                     if ("exp" in item):
                         exp = item["exp"]
-                    failures = test_helper(server, regdata, exp)
+                    failures = test_helper(server, regdata, exp, failures)
                 elif ("sleep" in item):
                     sltime = item["sleep"]
                     time.sleep(sltime)
+                
 
         elif (type(data) is dict):
-            if "regdata" in data:
+            if "iondata" in data:
                 regdata = data["iondata"]
             else :
                 regdata = data 

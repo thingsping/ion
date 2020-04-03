@@ -1,0 +1,15 @@
+{
+    "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.101",
+    "Nid" : "Idev1", 
+    "Mid" : "Idev1_1", 
+    "Time" : 55343213711, 
+    "Key" : "keyIdev1", 
+    "Data" : [{  
+        "Name" : "MotionSensor1", "NodeType" : "Sensor", 
+        "Location" : "Front door",
+        "Capabilities" :["Detect Motion"],
+        "Return" : {
+            "MotionDetected" : "Boolean"
+          }
+        }]
+}

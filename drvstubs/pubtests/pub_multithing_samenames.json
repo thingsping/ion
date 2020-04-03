@@ -1,0 +1,86 @@
+[
+    {
+        "meta" : {
+            "Name" : "Device with multiple things having same names",
+            "Desc" : "This test simulates a scenario where one microcontroller is used to connect to multiple things with the same name. Although a rarecase scenario - it is possible that there are two light sensors installed in adjacent rooms but connected to the same microcontroller. This test will currently fail due to https://github.com/thingsping/IONMP/issues/3"
+        }
+
+    },
+  {
+    "iondata" : {      
+       "Type": "Register", "Expires" : 3600,
+       "From" : "10.1.1.18", 
+       "Nid" : "Idev1", 
+       "Key" : "keyIdev1", 
+       "Mid" : "Idev1_001",
+       "Time" : "$time"
+    }
+  }, 
+  { 
+    "iondata" : {
+    "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.18",
+    "Nid" : "Idev1", 
+    "Mid" : "Idev1_001", 
+    "Time" : "$time", 
+    "Key" : "keyIdev1", 
+    "Data" : [
+          {
+            "Name" : "Light", "NodeType" : "Sensor", 
+            "Location" : "Living",
+            "Return" : {"State" : "Boolean"}
+          },
+          {  
+          "Name" : "Light", "NodeType" : "Sensor", 
+          "Location" : "Hall",
+          "Return" : {"State" : "Boolean"}
+          }
+      ]
+    }
+  }, 
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "Light",  "State" : true }]
+    }
+  },
+  {
+      "iondata" : {
+         "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+         "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
+         "Key" : "localhostkey", "Name" : "Light", "Location" : "Hall"
+      }, 
+      "exp" : [{
+        "Verify" : {"Type": 200, "Time": "$rtime", "Data": {"State" : true}}
+      }]
+  },
+  {
+    "iondata" : {
+      "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+      "Nid" : "Idev1", "Mid" : "Idev1005", "Time" : "$time", 
+      "Key" : "keyIdev1", 
+      "Data" : [{ "Name" : "Light",  "State" : false }]
+     }
+  },
+  {
+    "iondata" : {
+       "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+       "Nid" : "querylocalhost", "Mid" : "query0012", "Time" : "$time", 
+       "Key" : "localhostkey", "Name" : "Light", "Location" : "Living"
+    }, 
+    "exp" : [{
+      "Verify" : {"Type": 200, "Time": "$rtime", "Data": {"State" : false}}
+    }]
+  },
+  {
+    "iondata" : {
+       "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+       "Nid" : "querylocalhost", "Mid" : "query0012", "Time" : "$time", 
+       "Key" : "localhostkey", "Name" : "Light", "Location" : "Hall"
+    }, 
+    "exp" : [{
+      "Verify" : {"Type": 200, "Time": "$rtime", "Data": {"State" : true}}
+    }]
+  }
+]

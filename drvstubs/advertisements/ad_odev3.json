@@ -1,0 +1,15 @@
+{
+    "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.202",
+    "Nid" : "Odev3", 
+    "Mid" : "Odev3_1", 
+    "Time" : 55343213711, 
+    "Key" : "keyOdev3", 
+    "Data" : [{  
+        "Name" : "Buzzer#1", "NodeType" : "OutputDevice", 
+        "Location" : "Hall",
+        "Action" : "Beep",
+        "Capabilities" :["Beep"],
+        "Parameters" : {"Beep Time" : "Int", "Interval" : "Float"},
+        "Return" : { "State" : "Boolean"}
+        }]
+}

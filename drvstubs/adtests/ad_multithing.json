@@ -1,0 +1,78 @@
+[
+    {
+        "meta" : {
+            "Name" : "Device with multiple things ",
+            "Desc" : "This test simulates a scenario where one microcontroller is used to connect to multiple thing. For example, you could use a single microcontroller to control a fan, light and a buzzer"
+        }
+
+    },
+    {
+      "iondata" : {
+        "Type": "Register", 
+        "From" : "10.1.1.21", 
+        "Nid" : "Odev1", 
+        "Key" : "keyOdev1", 
+        "Mid" : "Odev1_001",
+        "Time" : "$time",
+        "Expires" : 3600
+      }
+    },
+    {
+        "iondata" : {
+            "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.21",
+            "Nid" : "Odev1", 
+            "Mid" : "Odev1_001", 
+            "Time" : "$time", 
+            "Key" : "keyOdev1", 
+            "Data" : [
+                {
+                    "Name" : "Light", "NodeType" : "OutputDevice", 
+                    "Location" : "Living",
+                    "Action" : "Switch",
+                    "Parameters" : {"State" : "Boolean"}
+                },
+                {  
+                "Name" : "Buzzer#2", "NodeType" : "OutputDevice", 
+                "Location" : "Hall",
+                "Action" : "Buzz",
+                "Capabilities" :["Beep"],
+                "Parameters" : {"Beep Time" : "Int", "Interval" : "Float", "Tune" : "Str", 
+                    "Is Active?" : "Boolean", "Needs Stopping?" : "Boolean"}
+                }]
+            }, "exp" : ["TYPE202"]
+    }, 
+    {
+        "iondata" : {
+            "Ver" : "0.8", "Mid" : "query0011", 
+            "Type" : "QUERY",  "From" : "localhost",
+             "Nid"  : "querylocalhost",
+             "TargetId" : "Odev1", 
+             "Time" : "$time"
+        }, 
+        "exp" : [{ 
+            
+            "Verify" : {"Data" : [
+                {
+                    "Name" : "Light", "NodeType" : "OutputDevice", 
+                    "Location" : "Living",
+                    "Action" : "Switch",
+                    "Parameters" : {"State" : "Boolean"},
+                    "Nid" : "Odev1", 
+                    "Contact" : "10.1.1.21"
+                },
+                {  
+                    "Name" : "Buzzer#2", "NodeType" : "OutputDevice", 
+                    "Location" : "Hall",
+                    "Action" : "Buzz",
+                    "Capabilities" :["Beep"],
+                    "Parameters" : {"Beep Time" : "Int", "Interval" : "Float", "Tune" : "Str", 
+                    "Is Active?" : "Boolean", "Needs Stopping?" : "Boolean"},
+                    "Nid" : "Odev1", 
+                    "Contact" : "10.1.1.21"
+                }]
+            }, "Exclude" : ["Expires"]
+
+        }]
+    }
+]
+

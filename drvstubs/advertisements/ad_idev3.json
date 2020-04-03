@@ -1,0 +1,15 @@
+{
+    "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.103",
+    "Nid" : "Idev3", 
+    "Mid" : "Idev3_1", 
+    "Time" : 55343213711, 
+    "Key" : "keyIdev3", 
+    "Data" : [{  
+        "Name" : "LightSensor1", "NodeType" : "Sensor", 
+        "Location" : "Bedroom",
+        "Capabilities" :["Detect Light Intensity"],
+        "Return" : {
+            "LightLevel" : "Int"
+          }
+        }]
+}

@@ -1,0 +1,10 @@
+
+[
+    {
+        "iondata" : {
+            "Type" : "GETSUMMARY" , "Ver" : "0.8", "From" : "shouldnotmatter",
+            "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
+            "Key" : "localhostkey", "Name" : "MotionSensor1", "Location" : "Front door"
+        }
+    }
+]

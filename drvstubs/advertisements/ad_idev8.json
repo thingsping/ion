@@ -1,0 +1,15 @@
+{
+    "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.108",
+    "Nid" : "Idev8", 
+    "Mid" : "Idev8_1", 
+    "Time" : 55343213711, 
+    "Key" : "keyIdev8", 
+    "Data" : [{  
+        "Name" : "SmokeDetector1", "NodeType" : "Sensor", 
+        "Location" : "Kitchen",
+        "Capabilities" :["Detect Smoke"],
+        "Return" : {
+            "Smoke Detected" : "Boolean"
+          }
+        }]
+}
