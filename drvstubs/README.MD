@@ -66,7 +66,7 @@ Each json element has one or more of the following keys:
     - Verify - The value of the Verify key will be a JSON which in turn has a Key value pair. 
     The test utility will check if the server's response has a key-value pair which matches the key-value specified in the **Verify** key. 
 
-    - <details>
+        - <details>
            <summary>Sample Verify for advertisement</summary>
            <pre>
             {
@@ -97,5 +97,5 @@ Each json element has one or more of the following keys:
 
     - Exclude - The other possible element in the **exp** key is the **Exclude** key. This key contains an array of Strings. This array represents the key's from the response which has to be removed before checking whether the response matches the expected value or not. Typically this is done for those fields which we don't care about in the current test. For example, the incoming Expires key could be set to a value which is a second or so less than the original request. That is because, the server might have taken a second since the original request was made. Likewise, we don't care about the server's time and we may want to exclude this from the test comparisons. 
 
-#####Example format for test json files#####
+##### Example format for test json files #####
 The directories adtest and regtests have test data files. Take a look at these to get a better understanding of the format. 
