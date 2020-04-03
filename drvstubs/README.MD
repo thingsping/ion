@@ -16,7 +16,8 @@ Please note that this test utility is evolving over time and we are adding test 
 The entry point of the test utility is the test_utility.py
 
 This can be run with different options. Run the command with -h option and you will see the usage help on the screen. 
-' usage: test_utility.py [-h] [-ra] [-s SERVER] [-f FILE] [-nd] [-d DIR]
+
+` usage: test_utility.py [-h] [-ra] [-s SERVER] [-f FILE] [-nd] [-d DIR]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -26,12 +27,13 @@ optional arguments:
   -f FILE, --file FILE  Choose an individual test file
   -nd, --nodbdelete     Do not clean up the db before starting tests
   -d DIR, --dir DIR     Run all files with extension of .json in the specified
-'
+`
 
 The -f and -d options takes in a test file as the argument and runs a test based on the content of this file. The format of the test file is described below:
 
 The file is a json file whose content is an array of json elements. The test utlity runs all these json elements in a sequential fashion. 
 Each json element has one or more of the following keys:
+
 **iondata** : A json element which represents the ION message that has to be sent to the server. 
         <details>
            <summary>Sample data for registration</summary>
