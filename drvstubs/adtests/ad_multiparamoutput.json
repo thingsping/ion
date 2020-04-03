@@ -33,19 +33,19 @@
          "Nid"  : "querylocalhost",
          "TargetId" : "Idev1", 
          "Time" : "$time"  
-      }, "exp" : [{
-            "Verify" : {
-                "Data" : [{  
-                "Name" : "Buzzer#2", "NodeType" : "OutputDevice", 
-                "Location" : "Living",
-                "Action" : "Buzz",
-                "Capabilities" :["Beep"],
-                "Parameters" : {"Beep Time" : "Int", "Interval" : "Float", "Tune" : "Str", 
-                    "Is Active?" : "Boolean", "Needs Stopping?" : "Boolean"}, 
-                    "Expires" : 3600, "Contact" : "10.1.1.18", "Nid" : "Idev1"
-                }]
-            }, "Exclude" : ["Expires"]
+      }, "exp" :[{ 
+            "Verify" :{                 
+                    "Data" : [{  
+                    "Name" : "Buzzer#2", "NodeType" : "OutputDevice", 
+                    "Location" : "Living",
+                    "Action" : "Buzz",
+                    "Capabilities" :["Beep"],
+                    "Parameters" : {"Beep Time" : "Int", "Interval" : "Float", "Tune" : "Str", 
+                        "Is Active?" : "Boolean", "Needs Stopping?" : "Boolean"}, 
+                        "Contact" : "10.1.1.18", "Nid" : "Idev1" 
+                    }]
+                }, "Exclude" : ["Expires"]
+            }]
 
-         }]
-    }
+        }
 ]

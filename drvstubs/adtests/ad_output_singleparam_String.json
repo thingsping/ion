@@ -1,4 +1,3 @@
-
 [
     {
       "iondata" : {      
@@ -16,13 +15,11 @@
       "Mid" : "Idev1_001", 
       "Time" : "$time", 
       "Key" : "keyIdev1", 
-      "Data" : [{  "Name" : "MagicSensor", "NodeType" : "Sensor", 
-        "Location" : "Hall",
-        "Capabilities" :["A lot"], 
-        "Return" : {
-            "Temperature" : "Float", "Humidity" : "Float", "Wind direction" : "Str",
-            "Friendly name" : "Str", "Is insanity?" : "Boolean", "Dayofweek" : "Int" 
-            }
+      "Data" : [{  
+        "Name" : "String Param Tester", "NodeType" : "OutputDevice", 
+        "Location" : "Bedroom",
+        "Action" : "Test String",
+        "Parameters" : {"Name" : "Str"}
           }]
       }, "exp" : ["TYPE202"]
     }, 
@@ -35,15 +32,15 @@
              "Time" : "$time"
         }, "exp" :[{ 
           "Verify" :{                 
-                  "Data" : [{  "Name" : "MagicSensor", "NodeType" : "Sensor", 
-                    "Location" : "Hall",
-                    "Capabilities" :["A lot"], 
-                    "Return" : {
-                        "Temperature" : "Float", "Humidity" : "Float", "Wind direction" : "Str",
-                        "Friendly name" : "Str", "Is insanity?" : "Boolean", "Dayofweek" : "Int" 
-                        }, "Contact" : "10.1.1.18", "Nid" : "Idev1"
+                  "Data" : [{  
+                    "Name" : "String Param Tester", "NodeType" : "OutputDevice", 
+                    "Location" : "Bedroom",
+                    "Action" : "Test String",
+                    "Parameters" : {"Name" : "Str"}
+                    , "Contact" : "10.1.1.18", "Nid" : "Idev1"
                   }]
               }, "Exclude" : ["Expires"]
           }]
     }
   ]
+

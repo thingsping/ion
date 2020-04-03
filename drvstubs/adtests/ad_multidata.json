@@ -42,28 +42,30 @@
              "TargetId" : "Odev1", 
              "Time" : "$time"
         }, 
-        "exp" : [{ "Data" : [
-            {
-                "Name" : "Light", "NodeType" : "OutputDevice", 
-                "Location" : "Living",
-                "Action" : "Switch",
-                "Parameters" : {"State" : "Boolean"},
-                "Expires" : 3600,
-                "Nid" : "Odev1", 
-                "Contact" : "10.1.1.21"
-            },
-            {  
-                "Name" : "Buzzer#2", "NodeType" : "OutputDevice", 
-                "Location" : "Hall",
-                "Action" : "Buzz",
-                "Capabilities" :["Beep"],
-                "Parameters" : {"Beep Time" : "Int", "Interval" : "Float", "Tune" : "Str", 
-                "Is Active?" : "Boolean", "Needs Stopping?" : "Boolean"},
-                "Expires" : 3600,
-                "Nid" : "Odev1", 
-                "Contact" : "10.1.1.21"
-            }]
+        "exp" : [{ 
+            
+            "Verify" : {"Data" : [
+                {
+                    "Name" : "Light", "NodeType" : "OutputDevice", 
+                    "Location" : "Living",
+                    "Action" : "Switch",
+                    "Parameters" : {"State" : "Boolean"},
+                    "Nid" : "Odev1", 
+                    "Contact" : "10.1.1.21"
+                },
+                {  
+                    "Name" : "Buzzer#2", "NodeType" : "OutputDevice", 
+                    "Location" : "Hall",
+                    "Action" : "Buzz",
+                    "Capabilities" :["Beep"],
+                    "Parameters" : {"Beep Time" : "Int", "Interval" : "Float", "Tune" : "Str", 
+                    "Is Active?" : "Boolean", "Needs Stopping?" : "Boolean"},
+                    "Nid" : "Odev1", 
+                    "Contact" : "10.1.1.21"
+                }]
+            }, "Exclude" : ["Expires"]
 
         }]
     }
 ]
+

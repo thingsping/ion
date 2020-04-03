@@ -32,11 +32,17 @@
              "Nid"  : "querylocalhost",
              "TargetId" : "Idev1", 
              "Time" : "$time"
-        }, "exp" : [{ "Data" : [{  
-            "Name" : "MotionSensor1", "NodeType" : "Sensor", "Location" : "Front door",
-            "Capabilities" :["Detect Motion"], "Return" : { 
-                "MotionDetected" : "Boolean"}, "Contact":"10.1.1.18", 
-                "Expires" : 3600, "Nid" : "Idev1"}]
-                }]
+        }, 
+        "exp" : [{
+           "Verify" : {"Data" : [{  
+              "Name" : "MotionSensor1", "NodeType" : "Sensor", "Location" : "Front door",
+              "Capabilities" :["Detect Motion"], "Return" : { 
+                  "MotionDetected" : "Boolean"}, "Contact":"10.1.1.18", 
+                  "Expires" : 3600, "Nid" : "Idev1"}]
+            }
+
+                }, 
+            "TYPE200"
+          ]
     }
   ]
