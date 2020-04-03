@@ -16,8 +16,7 @@ Please note that this test utility is evolving over time and we are adding test 
 The entry point of the test utility is the test_utility.py
 
 This can be run with different options. Run the command with -h option and you will see the usage help on the screen. 
-'
-usage: test_utility.py [-h] [-ra] [-s SERVER] [-f FILE] [-nd] [-d DIR]
+' usage: test_utility.py [-h] [-ra] [-s SERVER] [-f FILE] [-nd] [-d DIR]
 
 optional arguments:
   -h, --help            show this help message and exit
