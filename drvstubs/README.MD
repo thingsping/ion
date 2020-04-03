@@ -2,8 +2,7 @@ This folder contains various files which serve two purposes :
    - Create dummy entities and do operations like registrations, advertisements, etc., 
    - Run test scripts
 
-Markup : ```javascript
-         ```
+
 
 ### Creating Credentials ###
 The IONMP protocol mandates that only authorized devices are allowed to participate in the comminication. For this to happen, the server needs to know about such authorized participants. In the current version, we do not have a UI for adding these authorized entities. Instead these values have to be added directly to the database. 
@@ -20,7 +19,8 @@ The entry point of the test utility is the test_utility.py
 
 This can be run with different options. Run the command with -h option and you will see the usage help on the screen. 
 
-` usage: test_utility.py [-h] [-ra] [-s SERVER] [-f FILE] [-nd] [-d DIR]
+```
+usage: test_utility.py [-h] [-ra] [-s SERVER] [-f FILE] [-nd] [-d DIR]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -30,7 +30,8 @@ optional arguments:
   -f FILE, --file FILE  Choose an individual test file
   -nd, --nodbdelete     Do not clean up the db before starting tests
   -d DIR, --dir DIR     Run all files with extension of .json in the specified
-`
+ 
+```
 
 The -f and -d options takes in a test file as the argument and runs a test based on the content of this file. The format of the test file is described below:
 
