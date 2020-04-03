@@ -2,7 +2,7 @@ This folder contains various files which serve two purposes :
    - Create dummy entities and do operations like registrations, advertisements, etc., 
    - Run test scripts
 
-###Creating Credentials###
+####Creating Credentials####
 The IONMP protocol mandates that only authorized devices are allowed to participate in the comminication. For this to happen, the server needs to know about such authorized participants. In the current version, we do not have a UI for adding these authorized entities. Instead these values have to be added directly to the database. 
 
 The createcredentials.py python file takes care of this. Just execute:
