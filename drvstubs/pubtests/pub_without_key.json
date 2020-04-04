@@ -37,9 +37,7 @@
         "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
         "Data" : [{ "Name" : "MotionSensor1",  "MotionDetected" : true }]
     }, 
-    "exp" : [
-      "TYPE401"
-    ]
+    "exp" : ["TYPE401"]
   },
   {
       "iondata" : {
@@ -47,6 +45,6 @@
         "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
         "Key" : "localhostkey", "Name" : "MotionSensor1", "Location" : "Front door"
     }, 
-      "exp" : "TYPE401"
+      "exp" : ["TYPE404"]
   }
 ]

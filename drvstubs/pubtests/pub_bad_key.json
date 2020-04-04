@@ -40,6 +40,6 @@
         "Nid" : "querylocalhost", "Mid" : "query0011", "Time" : "$time", 
         "Key" : "localhostkey", "Name" : "MotionSensor1", "Location" : "Front door"
     }, 
-      "exp" : ["TYPE401"]
+      "exp" : ["TYPE404"]
   }
 ]
