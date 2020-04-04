@@ -70,7 +70,7 @@
                     "Nid" : "Odev1", 
                     "Contact" : "10.1.1.21"
                 }]
-            }, "Exclude" : ["Expires"]
+            }, "Exclude" : ["Expires", "ControlMethod"]
 
         }]
     }

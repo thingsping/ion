@@ -135,7 +135,11 @@ def test_helper(server, regdata, allexpected=None, failures=None):
                     if k in resp:
                         reqdrespval = resp[k]
                         if allexcludes is not None: # Remove those keys which we don't care about
-                            reqdrespval = delete_keys_from_dict(reqdrespval, allexcludes)                        
+                            if isinstance(v, dict):                            
+                                reqdrespval = delete_keys_from_dict(reqdrespval, allexcludes)   
+                            else :    
+                                if k in allexcludes : 
+                                    continue #This is an excluded key, just skip it. 
                         if v == "$rtime":                            
                             v = rtime
                             if abs(v - reqdrespval) <= 1 : # A grace time of 1 second for rounding/ comversions
@@ -241,6 +245,9 @@ def get_args():
 
     parser.add_argument("-nd", "--nodbdelete", 
       help="Do not clean up the db before starting tests", action="store_true")
+
+    parser.add_argument("-do", "--deleteonce", 
+      help="Cleanup the DB only once before running all tests. Without this the db will get deleted before each test", action="store_true")
     
     parser.add_argument("-d", "--dir", 
       help="Run all files with extension of .json in the specified directory", default=".")

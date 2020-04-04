@@ -34,13 +34,15 @@
              "TargetId" : "Odev1", 
              "Time" : "$time"
         }, "exp" : [{ 
-          "Data" : [{   
-              "Name" : "Exhaust Fan#1", "NodeType" : "OutputDevice", 
-              "Location" : "Kitchen",
-              "Action" : "Switch",
-              "Capabilities" :["Fan Control"],
-              "Parameters" : {"State" : "Boolean"}, 
-              "Contact":"10.1.1.28", "Expires" : 3600, "Nid" : "Odev1"}]
-          }]
-        }
+          "Verify" : {
+            "Data" : [{   
+                "Name" : "Exhaust Fan#1", "NodeType" : "OutputDevice", 
+                "Location" : "Kitchen",
+                "Action" : "Switch",
+                "Capabilities" :["Fan Control"],
+                "Parameters" : {"State" : "Boolean"}, 
+                "Contact":"10.1.1.28","Nid" : "Odev1"}]            
+          }, "Exclude" : ["Expires", "ControlMethod"]
+        }]
+    }
   ]

@@ -49,11 +49,12 @@ if __name__ == '__main__':
             td = "{}/*.json".format(args.dir)
             reqd_files = glob.glob(td)
             for f in reqd_files :
-                if not args.nodbdelete:
+                if args.nodbdelete or args.deleteonce:
+                    print("Executing {} without cleaning up db".format(f))                    
+                else :
                     print("Cleaning up database and Executing {}".format(f))
                     cleanup_db()
-                else :
-                    print("Executing {} without cleaning up db".format(f))
+                    
                 cur_failures = test_file(args.server, f)
                 if len(cur_failures) != 0 :
                     failures[f] = cur_failures

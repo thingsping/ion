@@ -43,7 +43,7 @@
                         "Friendly name" : "Str", "Is insanity?" : "Boolean", "Dayofweek" : "Int" 
                         }, "Contact" : "10.1.1.18", "Nid" : "Idev1"
                   }]
-              }, "Exclude" : ["Expires"]
+              }, "Exclude" : ["Expires", "ControlMethod"]
           }]
     }
   ]

@@ -34,15 +34,17 @@
          "TargetId" : "Idev2", 
          "Time" : "$time"
     }, 
-    "exp" : [{ "Data" : [{          
+    "exp" : [{ 
+        
+        "Verify" : {"Data" : [{          
             "Name" : "TemperatureSensor", "NodeType" : "Sensor", 
             "Location" : "Bedroom",
             "Capabilities" :["Read Temperature", "Read Humidity"], 
             "Return" : {
                 "Temperature" : "Float", "Humidity" : "Float", "HeatIndex" : "Float" 
                 }, 
-                "Expires" : 3600, "Nid" : "Idev2", "Contact" : "10.1.1.18"}]
-            
+                "Nid" : "Idev2", "Contact" : "10.1.1.18"}]
+        }, "Exclude" : ["Expires", "ControlMethod"]
             }]
     }
 ]
