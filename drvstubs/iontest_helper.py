@@ -65,14 +65,18 @@ def test_helper(server, regdata, allexpected=None, failures=None):
         for exp in allexpected :
             #print(exp)
             if (exp == "DBNOREGFOUND"):                        
-                res = coln_reg.find_one({"DevId" : devid})
+                checkid = devid
+                if ("TargetId" in regdata):
+                    checkid = regdata["TargetId"]
+                res = coln_reg.find_one({"DevId" : checkid})
+                print("Result of {} - {}".format(checkid, res))
                 if res is None :
                     passcount = passcount + 1 
                 else :
                     failcount = failcount + 1 
                     #print("Expected that all registrations would "
                     #    "have been deleted, but found {}".format(res))
-                    failure_msg.append(("All registrations have not been deleted",res))
+                    failure_msg.append(("All registrations have been deleted",res))
             elif (exp == "DBEXPIRES"): 
                 res = coln_reg.find_one({"DevId" : devid})
                 # Note : we need a grace time of 1 second. Even though it is the same
@@ -94,15 +98,30 @@ def test_helper(server, regdata, allexpected=None, failures=None):
                     failcount = failcount + 1
                     #print("Expected expires = {}, actual={}".format(expires, resp_expires))
                     failure_msg.append(("Expires={}".format(expires), resp_expires))
-            elif (type(exp) == str and exp.startswith("TYPE")):
-                resp_type = resp["Type"]
-                req_type = int(exp[4:])
-                if (resp_type == req_type):
-                    passcount = passcount + 1
-                else :
-                    failcount = failcount + 1
-                    #print("Expected type={}, actual={}".format(req_type, resp_type))
-                    failure_msg.append(("Response type={}".format(req_type), resp_type ))
+            elif type(exp) == str :
+                if exp.startswith("TYPE"):
+                    resp_type = resp["Type"]
+                    req_type = int(exp[4:])
+                    if (resp_type == req_type):
+                        passcount = passcount + 1
+                    else :
+                        failcount = failcount + 1
+                        #print("Expected type={}, actual={}".format(req_type, resp_type))
+                        failure_msg.append(("Response type={}".format(req_type), resp_type ))
+                elif exp.startswith("EXPIRES"):
+                    if "Expires" in resp:
+                        resp_expires = resp["Expires"]
+                    elif "Data" in resp:
+                        resp_data = resp["Data"]
+                        resp_expires = resp_data[0]["Expires"]
+                    exp_expires = int(exp[7:])
+                    if abs(resp_expires - exp_expires) <= 1:
+                        passcount = passcount + 1
+                    else :
+                        failcount = failcount + 1
+                        #print("Expected type={}, actual={}".format(req_type, resp_type))
+                        failure_msg.append(("~{}".format(exp_expires), resp_expires ))
+                
             elif(type(exp) == dict):
                 allexcludes = None              
                 if "Verify" in exp : # We added the concept of Verify key later on.     
@@ -173,7 +192,6 @@ def test_from_template(server, reg_tpl_dict, ctr, exp_code, devname, testname=""
         #print("For {}, expected = {}. Actual = {}".format(testname, exp_code, resptype))
         failure_msg.append((exp_code, resptype))
     return failure_msg    
-
 
 def test_file(server, regfile):           
     failures=[]

@@ -19,6 +19,6 @@
         "Mid" : "Idev1_002",
         "Time" : "$time"
 
-    }, "exp" : ["DBNOREGFOUND", "RESPEXPIRES", "TYPE200"]
+    }, "exp" : ["DBNOREGFOUND", "RESPEXPIRES", "TYPE200", "EXPIRES0"]
  }
 ]

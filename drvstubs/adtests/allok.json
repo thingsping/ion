@@ -33,16 +33,19 @@
              "TargetId" : "Idev1", 
              "Time" : "$time"
         }, 
-        "exp" : [{
-           "Verify" : {"Data" : [{  
-              "Name" : "MotionSensor1", "NodeType" : "Sensor", "Location" : "Front door",
-              "Capabilities" :["Detect Motion"], "Return" : { 
-                  "MotionDetected" : "Boolean"}, "Contact":"10.1.1.18", 
-                  "Expires" : 3600, "Nid" : "Idev1"}]
-            }
-
-                }, 
-            "TYPE200"
-          ]
+        "exp" : [
+          "TYPE200", "EXPIRES3600", 
+          {
+           "Verify" : {
+              "Data" : [{  
+                "Name" : "MotionSensor1", "NodeType" : "Sensor", "Location" : "Front door",
+                "Capabilities" :["Detect Motion"], "Return" : { 
+                    "MotionDetected" : "Boolean"}, "Contact":"10.1.1.18", 
+                    "Nid" : "Idev1"
+                 }]
+            
+            }, "Exclude" : ["Expires"]
+          }
+       ]
     }
   ]
