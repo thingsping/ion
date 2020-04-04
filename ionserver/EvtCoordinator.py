@@ -109,17 +109,17 @@ class EvtCoordinator(threading.Thread):
                     all_data =   devdetails[HDR_DATA]
                     for data in all_data :
                         devname = data[HDR_NAME]
-                        print ("Attempting control device - {}".format(devname))
+                        print ("Attempting control device - {}-{}".format(devname,devdetails))
                         if (req_name == devname) :
                           ctr_dict = {}
                           ctr_dict[HDR_TYPE] = TYPE_CTL
                           ctr_dict[HDR_VER] = VER_VALUE
                           ctr_dict[HDR_FROM] = get_self_address()
-                          ctr_dict[HDR_DEVID] = self._devid
+                          ctr_dict[HDR_DEVID] = req_devid
                           ctr_dict[HDR_MSGID] = query_dict[HDR_MSGID]
                           ctr_dict[HDR_TIME] = req_time
-                          ctr_dict[HDR_KEY] = data[HDR_KEY] 
-                          
+                          ctr_dict[HDR_KEY] = data[HDR_KEY]        
+                          ctr_dict[HDR_CONTROLMETHOD] = data[HDR_CONTROLMETHOD]
                           ctr_data = {}
                           ctr_data[HDR_LOCATION] = req_location
                           ctr_data[HDR_NAME] = action[HDR_NAME]
@@ -164,7 +164,7 @@ class EvtCoordinator(threading.Thread):
 
                           tgt = data[HDR_CONTACT]
                           
-                          print("All set now. Will send CONTROL message to %s" %(tgt))
+                          print("All set now. Will send CONTROL message - {} to {}".format(ctr_dict,tgt))
                           #print (ctr_dict)    
                           sender = HttpSender(name = "ctlsender-{}-{}".format(HDR_MSGID, time.time()))
                           sender.setParameters("http://{}".format(tgt), ctr_dict)

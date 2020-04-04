@@ -1,0 +1,64 @@
+[  
+  {
+    "meta" : {
+      "Name" : "Test POLLCONTROL which triggers multiple times", 
+      "Desc" : "First we send a publish message such that it matches an event-action relationship. We repeat similar publish messsages which would trigger the action multiple times. We Then send a POLLCONTROL message and confirm that we get back a CONTROL message. The control message should have the control multiple times. Whether the same control message makes sense to be produced multiple times or not, we leave it to the discretion of the actuator. ",
+      "Precondition"  : "./subscribe_entities.json"
+    }
+  },
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "LightSensor1",  "LightLevel" : 2 }]
+    }
+  },
+  {
+    "sleep": 1
+  },
+
+  {
+    "iondata" : {
+      "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+      "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+      "Key" : "keyIdev1", 
+      "Data" : [{ "Name" : "LightSensor1",  "LightLevel" : 1 }]
+    }
+  },
+  {
+    "sleep": 1
+  },
+
+  {
+    "iondata" : {
+      "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+      "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+      "Key" : "keyIdev1", 
+      "Data" : [{ "Name" : "LightSensor1",  "LightLevel" : 0 }]
+    }
+  },
+  {
+    "sleep": 1
+  },
+  {
+    "iondata" :{
+      "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.28",
+      "Nid" : "Odev1", "Mid" : "Odev1_ctl_001", "Time" : "$rtime", 
+      "Key" : "keyOdev1"
+    }, 
+    "exp" : [
+      {
+          "Verify" : { 
+            "Nid": "Odev1", "Key" :"keyOdev1", "Type" : "CONTROL", "Data": [
+              {"Location": "Bedroom", "Name": "Light#2", "Action": "Switch", "Parameters": {"State": true}}, 
+              {"Location": "Bedroom", "Name": "Light#2", "Action": "Switch", "Parameters": {"State": true}}, 
+              {"Location": "Bedroom", "Name": "Light#2", "Action": "Switch", "Parameters": {"State": true}}
+            
+            ]
+          }, 
+          "Exclude" : ["Mid", "Time", "From", "Ver"]
+      }
+    ]
+  }
+]

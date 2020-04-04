@@ -1,0 +1,24 @@
+[  
+  {
+    "meta" : {
+      "Name" : "Test After unregister", 
+      "Desc" : "Registration has been done but while sending POLL Control we use wrong key"
+    
+    }
+  },
+  { 
+     "iondata" : {  "Type": "Register", 
+     "Expires" : 0,   "From" : "10.1.1.11", "Nid" : "Odev1",  "Key" : "keyOdev1", 
+     "Mid" : "Odev1_001", "Time" : "$time"}
+  },
+  {
+    "iondata" :{
+      "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.28",
+      "Nid" : "Odev1", "Mid" : "Odev1_ctl_002", "Time" : "$rtime", 
+      "Key" : "KeyOdev1"
+    }, 
+    "exp" : [
+      "TYPE403"
+    ]
+  }
+]

@@ -1,0 +1,37 @@
+[  
+  {
+    "meta" : {
+      "Name" : "Test POLLCONTROL when the controlled action is a parametrized value", 
+      "Desc" : "A sensor produces a value which triggers an event-action relationship. The Action is such that it sends back the value of the sensor's data itself to the actuator",
+      "Precondition"  : "./subscribe_entities.json"
+    }
+  },
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "TiltSensor1",  "Tilt" : 46 }]
+    }
+  },
+  {
+    "sleep" : 1
+  },
+  {
+    "iondata" :{
+      "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.24",
+      "Nid" : "Odev4", "Mid" : "Odev4_ctl_001", "Time" : "$rtime", 
+      "Key" : "keyOdev4"
+    }, 
+    "exp" : [
+      {
+          "Verify" : { 
+            "Nid": "Odev4", "Key" :"keyOdev4", "Type" : "CONTROL", "Data": [
+              { "Location": "Hall", "Name": "Buzzer#1", "Action": "Beep", "Parameters": {"Beep Time": 46, "Interval" : 1}}
+            ]
+          }, 
+          "Exclude" : ["Mid", "Time", "From", "Ver"]
+      }
+    ]
+  }
+]

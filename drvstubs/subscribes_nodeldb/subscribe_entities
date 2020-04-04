@@ -1,0 +1,214 @@
+[   
+    { 
+        "iondata" : {  "Type": "Register", 
+        "Expires" : 3600,   "From" : "10.1.1.11", "Nid" : "Idev1",  "Key" : "keyIdev1", 
+        "Mid" : "Idev1_001", "Time" : "$time"}
+    },
+    {
+        "iondata" : {
+        "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.11", "Nid" : "Idev1", 
+        "Mid" : "Idev1_001", "Time" : "$time", "Key" : "keyIdev1", 
+        "Data" : [{  
+                "Name" : "LightSensor1", "NodeType" : "Sensor", "Location" : "Bedroom",
+                "Return" : {"LightLevel" : "Int"}
+            },
+            {  
+                "Name" : "TiltSensor1", "NodeType" : "Sensor", "Location" : "Bedroom",
+                "Return" : {"Tilt" : "Int"}
+            }       
+            ], "ControlMethod" : "Poll"
+        }
+    },
+    { 
+        "iondata" : {  "Type": "Register", 
+        "Expires" : 3600,   "From" : "10.1.1.21", "Nid" : "Odev1",  "Key" : "keyOdev1", 
+        "Mid" : "Odev1_001", "Time" : "$time"}
+    },
+    {
+        "iondata" : {
+        "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.21", "Nid" : "Odev1", 
+        "Mid" : "Odev1_001", "Time" : "$time", "Key" : "keyOdev1", 
+        "Data" : [{  
+                "Name" : "Light#2", "NodeType" : "OutputDevice", "Location" : "Bedroom",
+                "Parameters" : {"State" : "Boolean"},  "Action" : "Switch"
+            },
+            {  
+                "Name" : "Music Player", "NodeType" : "OutputDevice", "Location" : "Bedroom",
+                "Parameters" :  {"Sound Track" : "String"}, "Action" : "Play"
+            }
+         ], "ControlMethod" : "Poll"
+        }
+    },
+    {
+        "iondata" : {  "Type": "Register", 
+        "Expires" : 3600,   "From" : "10.1.1.12", "Nid" : "Idev2",  "Key" : "keyIdev2", 
+        "Mid" : "Idev2_001", "Time" : "$time"
+        }
+    },
+    {
+        "iondata" : {
+        "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.12", "Nid" : "Idev2", 
+        "Mid" : "Idev2_001", "Time" : "$time", "Key" : "keyIdev2", 
+        "Data" : [{  
+            "Name" : "WaterLevel1", "NodeType" : "Sensor", "Location" : "Tank",
+            "Return" : {"WaterLevel" : "Int"}
+            }], "ControlMethod" : "Poll"
+        }
+    },
+    { 
+        "iondata" : {  "Type": "Register", 
+        "Expires" : 3600,   "From" : "10.1.1.22", "Nid" : "Odev2",  "Key" : "keyOdev2", 
+        "Mid" : "Odev2_001", "Time" : "$time"}
+    },
+    {
+        "iondata" : {
+        "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.22", "Nid" : "Odev2", 
+        "Mid" : "Odev2_001", "Time" : "$time", "Key" : "keyOdev2", 
+        "Data" : [{  
+                "Name" : "Main Pump", "NodeType" : "OutputDevice", "Location" : "Pump room",
+                "Parameters" : {"State" : "Boolean"},  "Action" : "Switch"
+            }       
+         ], "ControlMethod" : "Poll"
+        }
+    },
+    {
+        "iondata" : {  "Type": "Register", 
+            "Expires" : 3600,   "From" : "10.1.1.13", "Nid" : "Idev3",  "Key" : "keyIdev3", 
+            "Mid" : "Idev3_001", "Time" : "$time"
+        }
+    },
+    {
+        "iondata" : {
+            "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.13", "Nid" : "Idev3", 
+            "Mid" : "Idev3_001", "Time" : "$time", "Key" : "keyIdev3", 
+            "Data" : [
+                {  
+                "Name" : "TemperatureSensor", "NodeType" : "Sensor", "Location" : "Kitchen",
+                "Return" : {"Temperature" : "Float"}
+                },
+                {  
+                    "Name" : "GasDetector1", "NodeType" : "Sensor", "Location" : "Kitchen",
+                    "Return" : {"Gas Detected" : "Boolean"}
+                }
+            ], "ControlMethod" : "Poll"
+        }
+    },
+    {
+        "iondata" : {  "Type": "Register", 
+            "Expires" : 3600,   "From" : "10.1.1.13", "Nid" : "Odev3",  "Key" : "keyOdev3", 
+            "Mid" : "Odev3_001", "Time" : "$time"
+        }
+    },
+    {
+        "iondata" : {
+            "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.23", "Nid" : "Odev3", 
+            "Mid" : "Odev3_001", "Time" : "$time", "Key" : "keyOdev3", 
+            "Data" : [
+                {  
+                "Name" : "Exhaust Fan#1", "NodeType" : "Sensor", "Location" : "Kitchen",
+                "Parameters" :  {"State" : "Boolean"} ,  "Action" : "Switch"
+                }
+            ], "ControlMethod" : "Poll"
+        }
+    },
+    {
+        "iondata" : {  "Type": "Register", 
+            "Expires" : 3600,   "From" : "10.1.1.14", "Nid" : "Idev4",  "Key" : "keyIdev4", 
+            "Mid" : "Idev4_001", "Time" : "$time"
+        }
+    },
+    {
+        "iondata" : 
+        {
+            "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.14", "Nid" : "Idev4", 
+            "Mid" : "Idev4_001", "Time" : "$time", "Key" : "keyIdev4", 
+            "Data" : [
+                {  
+                "Name" : "MotionSensor1", "NodeType" : "Sensor", "Location" : "Front door",
+                "Return" : {"MotionDetected" : "Boolean"}
+                }
+            ], "ControlMethod" : "Poll"
+        }
+    },
+    {
+            "iondata" : {  
+                "Type": "Register", "Expires" : 3600,   "From" : "10.1.1.24", "Nid" : "Odev4",  
+                "Key" : "keyOdev4", "Mid" : "Odev4_001", "Time" : "$time"
+            }
+    },
+    {
+            "iondata" : {
+                "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.24", "Nid" : "Odev4", 
+                "Mid" : "Odev4_001", "Time" : "$time", "Key" : "keyOdev4", 
+                "Data" : [
+                    {  
+                    "Name" : "Display#1", "NodeType" : "OutputDevice", "Location" : "Hall",
+                    "Parameters" : {"Line1" : "String", "Line2" : "String"},  "Action" : "Display"
+                    },
+                    {  
+                        "Name" : "Buzzer#1", "NodeType" : "OutputDevice", "Location" : "Hall",
+                        "Parameters" : {"Beep Time" : "Int", "Interval" : "Int"},  "Action" : "Beep"
+                    }
+                ], "ControlMethod" : "Poll"
+            }
+    },
+    {
+            "iondata" : {  
+                "Type": "Register", "Expires" : 3600,   "From" : "10.1.1.25", "Nid" : "Odev5",  
+                "Key" : "keyOdev5", "Mid" : "Odev5_001", "Time" : "$time"
+            }
+    },
+    {
+            "iondata" : {
+                "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.25", "Nid" : "Odev5", 
+                "Mid" : "Odev5_001", "Time" : "$time", "Key" : "keyOdev5", 
+                "Data" : [
+                    {  
+                    "Name" : "SMS Gateway", "NodeType" : "OutputDevice", "Location" : "Server",
+                    "Parameters" : {"Message" : "String", "Recipient" : "String"},  "Action" : "Send SMS"
+                    }
+                ], "ControlMethod" : "Poll"
+            }
+    },
+    {
+        "iondata" : {  
+            "Type": "Register", 
+            "Expires" : 3600,   "From" : "10.1.1.15", "Nid" : "Idev5",  "Key" : "keyIdev5", 
+            "Mid" : "Idev5_001", "Time" : "$time"
+        }
+    },
+    {
+        "iondata" : 
+        {
+            "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.15", "Nid" : "Idev5", 
+            "Mid" : "Idev5_001", "Time" : "$time", "Key" : "keyIdev5", 
+            "Data" : [
+                {  
+                "Name" : "RFReader", "NodeType" : "Sensor", "Location" : "Front door",
+                "Return" : {"Card data" : "String"}
+                }
+            ], "ControlMethod" : "Poll"
+        }
+    },
+    {
+        "iondata" : {  "Type": "Register", 
+            "Expires" : 3600,   "From" : "10.1.1.26", "Nid" : "Odev6",  "Key" : "keyOdev6", 
+            "Mid" : "Odev6_001", "Time" : "$time"
+        }
+    },
+    {
+        "iondata" : {
+            "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.26", "Nid" : "Odev6", 
+            "Mid" : "Odev6_001", "Time" : "$time", "Key" : "keyOdev6", 
+            "Data" : [
+                {  
+                "Name" : "DoorLock", "NodeType" : "Sensor", "Location" : "Front door",
+                "Parameters" :  {"State" : "Boolean"} ,  "Action" : "Unlock"
+                }
+            ], "ControlMethod" : "Poll"
+        }
+    }
+
+
+]
+

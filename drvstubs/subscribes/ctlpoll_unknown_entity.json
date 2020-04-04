@@ -1,0 +1,16 @@
+[  
+  {
+    "meta" : {
+      "Name" : "Test by using the wrong key", 
+      "Desc" : "Registration has been done but while sending POLL Control we use wrong key",
+      "Precondition"  : "./subscribe_entities.json"
+    }
+  },
+  {
+    "iondata" :{
+      "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.28",
+      "Nid" : "OdevUnknown", "Mid" : "Odev1_ctl_002", "Time" : "$rtime", 
+      "Key" : "Doesnt matter"
+    }, "exp" : ["TYPE403"]
+  }
+]

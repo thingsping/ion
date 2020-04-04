@@ -1,0 +1,53 @@
+[  
+  {
+    "meta" : {
+      "Name" : "Test Event-Action with multiple actions", 
+      "Desc" : "First we send a publish message such that it matches an event-action relationship. This definition will be such that it triggers multiple actions across multiple devices. We then send two POLLCONTROL messages and confirm that we get back a CONTROL message for each message. Finally we send back another POLLCONTROL and verify that the CONTROL message is not sent anymore for consumed events",
+      "Precondition"  : "./subscribe_entities.json"
+    }
+  },
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.12",
+        "Nid" : "Idev2", "Mid" : "Idev2004", "Time" : "$time", 
+        "Key" : "keyIdev2", 
+        "Data" : [{ "Name" : "WaterLevel1",  "WaterLevel" : 299 }]
+    }
+  },
+  {
+    "sleep": 1
+  },
+  {
+    "iondata" :{
+      "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.22",
+      "Nid" : "Odev2", "Mid" : "Odev2_ctl_001", "Time" : "$rtime", 
+      "Key" : "keyOdev2"
+    }, 
+    "exp" : [
+      {
+          "Verify" : { 
+            "Nid": "Odev2", "Key" :"keyOdev2", "Type" : "CONTROL", "Data": [{"Location": "Pump room", "Name": "Main Pump", "Action": "Switch", "Parameters": {"State": true}}]
+          }, 
+          "Exclude" : ["Mid", "Time", "From", "Ver"]
+      }
+    ]
+  }, 
+  {
+    "sleep": 1
+  },
+  {
+    "iondata" :{
+      "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.25",
+      "Nid" : "Odev5", "Mid" : "Odev5_ctl_002", "Time" : "$rtime", 
+      "Key" : "keyOdev5"
+    }, 
+    "exp" : [
+      {
+        "Verify" : { 
+          "Nid": "Odev5", "Key" :"keyOdev5", "Type" : "CONTROL", "Data": [{"Location": "Server", "Name": "SMS Gateway", "Action": "Send SMS", "Parameters": {"Message": "Water level too low", "Recipient" : "Raghu"}}]
+        }, 
+        "Exclude" : ["Mid", "Time", "From", "Ver"]
+      }
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+[  
+  {
+    "meta" : {
+      "Name" : "Test for string match", 
+      "Desc" : "First we send a publish message from a sensor that sends out text such that it matches an event-action relationship. We then send a POLLCONTROL message and confirm that we get back a CONTROL message. Finally we send back another POLLCONTROL and verify that the CONTROL message is not sent anymore for consumed events",
+      "Precondition"  : "./subscribe_entities.json"
+    }
+  },
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.15",
+        "Nid" : "Idev5", "Mid" : "Idev5008", "Time" : "$time", 
+        "Key" : "keyIdev5", 
+        "Data" : [{ "Name" : "RFReader",  "Card data" : "VIPCARD" }]
+    }
+  },
+  {
+    "sleep": 1
+  },
+  {
+    "iondata" :{
+      "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.26",
+      "Nid" : "Odev6", "Mid" : "Odev6_ctl_001", "Time" : "$rtime", 
+      "Key" : "keyOdev6"
+    }, 
+    "exp" : [
+      {
+          "Verify" : { 
+            "Nid": "Odev6", "Key" :"keyOdev6", "Type" : "CONTROL", "Data": [{"Location": "Front door", "Name": "DoorLock", "Action": "Unlock", "Parameters": {"State": true}}]
+          }, 
+          "Exclude" : ["Mid", "Time", "From", "Ver"]
+      }
+    ]
+  }
+]

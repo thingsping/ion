@@ -135,7 +135,8 @@ def test_helper(server, regdata, allexpected=None, failures=None):
                     if k in resp:
                         reqdrespval = resp[k]
                         if allexcludes is not None: # Remove those keys which we don't care about
-                            if isinstance(v, dict):                            
+                            
+                            if isinstance(v, dict) or isinstance(v, list):                            
                                 reqdrespval = delete_keys_from_dict(reqdrespval, allexcludes)   
                             else :    
                                 if k in allexcludes : 

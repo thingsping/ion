@@ -1,0 +1,27 @@
+[  
+  {
+    "meta" : {
+      "Name" : "Test POLLCONTROL when no messages waiting", 
+      "Desc" : "First we send a publish message for a sensor which has an event-action relationship. BUT THE VALUE DOES NOT MATCH THE CONDITION. We then send a POLLCONTROL message and verify that the CONTROL message is not sent ",
+      "Precondition"  : "./subscribe_entities.json"
+    }
+  },
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "LightSensor1",  "LightLevel" : 4 }]
+    }
+  },
+  {
+    "iondata" :{
+      "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.28",
+      "Nid" : "Odev1", "Mid" : "Odev1_ctl_002", "Time" : "$rtime", 
+      "Key" : "keyOdev1"
+    }, 
+    "exp" : [
+      "TYPE404"
+    ]
+  }
+]

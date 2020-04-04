@@ -145,17 +145,23 @@ class Registrar():
     else :
       return False 
 
+  # THE FOLLOWING METHOD probably belongs to the admanager class. 
+  # Review and change later on. 
   def get_query_item(self, reg):
       filter = {DBHDR_DEVID : reg[DBHDR_DEVID]}
       res = DBManager.find_one(DB_ADS_COLN, filter)
       datas = []
-      if (res is not None):
+      if (res is not None):          
           for data in res[HDR_DATA]:
               #data = res[HDR_DATA]
               data[HDR_DEVID] = res[DBHDR_DEVID]
               data[HDR_CONTACT] = reg[HDR_FROM]
               cur_time = int(time.time())
               data[HDR_EXPIRES] = reg[HDR_EXPIRES] -cur_time
+              if HDR_CONTROLMETHOD in res:
+                data[HDR_CONTROLMETHOD] = res[HDR_CONTROLMETHOD]
+              else :
+                data[HDR_CONTROLMETHOD] = "Daemon" # There should be an auto discovery technique
               datas.append(data)
       return datas
 

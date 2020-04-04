@@ -113,7 +113,7 @@ class AdManager():
             else :
                 datas = self._reg.get_query_item(reqd_regs)
                 datacount = 0 
-                for data in datas : 
+                for data in datas :
                     if (data is not None):
                         #Key will ONLY be send in case of individual queries
                         if(get_key):

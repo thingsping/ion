@@ -1,0 +1,32 @@
+[  
+  {
+    "meta" : {
+      "Name" : "Test POLLCONTROL when publish matches device but not thing", 
+      "Desc" : "We have a device that has two different sensor things - say thing1 and thing2.  we send a publish message such that it matches an event-action relationship of 'thing2'. We then send a POLLCONTROL message to query for the device. Verify that we get back data for only the correct event",
+      "Precondition"  : "./subscribe_entities.json"
+    }
+  },
+  {
+      "iondata" : {
+        "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
+        "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
+        "Key" : "keyIdev1", 
+        "Data" : [{ "Name" : "TiltSensor1",  "Tilt" : 31 }]
+    }
+  },
+  {
+    "iondata" :{
+      "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.28",
+      "Nid" : "Odev1", "Mid" : "Odev1_ctl_001", "Time" : "$rtime", 
+      "Key" : "keyOdev1"
+    }, 
+    "exp" : [
+      {
+          "Verify" : { 
+            "Nid": "Odev1", "Key" :"keyOdev1", "Type" : "CONTROL", "Data": [{"Location": "Bedroom", "Name": "Music Player", "Action": "Play", "Parameters": {"Sound Track": "lullaby.mp3"}}]
+          }, 
+          "Exclude" : ["Mid", "Time", "From", "Ver"]
+      }
+    ]
+  }
+]

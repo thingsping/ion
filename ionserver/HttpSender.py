@@ -21,7 +21,7 @@
 __author__ = "raghu"
 __date__ = "$July 1st, 2019 "
 
-import threading, time, requests, json
+import threading, time, requests, json, copy
 from .constants import *
 from .DBManager import DBManager
 from .CredsManager import CredsManager
@@ -50,7 +50,19 @@ class HttpSender(threading.Thread):
             if self._json[HDR_CONTROLMETHOD] == CONTROLMETHOD_POLL :
                 devid = self._json[HDR_DEVID]
                 thingname = self._json[HDR_DATA][0][HDR_NAME]
-                HttpSender.PendingRequests["{}.{}".format(devid, thingname)] = self._json
+                dct_thing = {}
+                #dct_thing[thingname] = 
+                dct_dev = None
+                if devid in HttpSender.PendingRequests:
+                    dct_dev = HttpSender.PendingRequests[devid]
+                else:
+                    dct_dev = []
+                dct_dev.append(copy.deepcopy(self._json))    
+                HttpSender.PendingRequests[devid] = dct_dev
+
+                '''
+                HttpSender.PendingRequests["{}.{}".format(devid, thingname)] = copy.deepcopy(self._json)
+                '''
                 print("This device {}.{} only supports polling. will wait for poll request".format(devid, thingname))
                 pdict = {}
                 pdict[DBHDR_DEVID] = devid 
@@ -91,23 +103,42 @@ class HttpSender(threading.Thread):
         status[HDR_VER] = VER_VALUE
         status[HDR_DEVID] = devid
         cm = CredsManager.getCredsManager()
-        isauth = cm.check_device(devid, msg[HDR_KEY])
+        isauth=False
+        try :
+            isauth = cm.check_device(devid, msg[HDR_KEY])
+        except : 
+            isauth = False
+            status[HDR_TYPE] = EXCP_FORBIDDEN_CODE
         if isauth:  
-            darray = []
-            removearray = []
+            darray = []      
+            send_key= None
+            '''
             pendingcount = 0 
+            removearray = []
             for key in HttpSender.PendingRequests.keys():
+                #High risk to fix #12
                 if (key.startswith("{}.".format(devid))):
                     pendingcount = pendingcount + 1
                     req = HttpSender.PendingRequests[key]
+                    send_key = req[HDR_KEY]
                     removearray.append(key)
                     for data in req[HDR_DATA] :
                         darray.append(data)
             for rem in removearray :
-                HttpSender.PendingRequests.pop(rem)        
-            if (pendingcount > 0):
+                HttpSender.PendingRequests.pop(rem)                                
+                '''
+            ctlfordev = HttpSender.PendingRequests.pop(devid, None)            
+            if ctlfordev is not None:
+                #remember we have added all pending controls as an 
+                #array of dictionaries so that we can maintain the order 
+                for ctl in ctlfordev:
+                    if (send_key is None): #All elements will have the same key. Just get it once
+                        send_key = ctl[HDR_KEY]
+                    for data in ctl[HDR_DATA] :
+                        darray.append(data)                  
                 status[HDR_TYPE] = TYPE_CTL
                 status[HDR_DATA] = darray
+                status[HDR_KEY] = send_key
                 pdict = {}
                 pdict[DBHDR_DEVID] = devid 
                 gc = DBManager.getGlobalCollection(DB_CONTROL_POLL)
