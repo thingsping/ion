@@ -111,17 +111,22 @@ class AdManager():
                 self._status[HDR_TYPE] = EXCP_NOTFOUND_CODE
                 self._status[HDR_RESPONSECLAUSE] = EXCP_NOTFOUND
             else :
-                self._status[HDR_TYPE] = STATUS_OK_CODE
-                self._status[HDR_RESPONSECLAUSE] = STATUS_OK
-
                 datas = self._reg.get_query_item(reqd_regs)
+                datacount = 0 
                 for data in datas : 
                     if (data is not None):
                         #Key will ONLY be send in case of individual queries
                         if(get_key):
                             data[HDR_KEY] = reqd_regs[HDR_KEY]
                         dataarr.append(data)
-                self._status[HDR_DATA] = dataarr
+                        datacount = datacount + 1
+                if (datacount != 0 ):
+                    self._status[HDR_DATA] = dataarr
+                    self._status[HDR_TYPE] = STATUS_OK_CODE
+                    self._status[HDR_RESPONSECLAUSE] = STATUS_OK
+                else : 
+                    self._status[HDR_TYPE] = EXCP_NOTFOUND_CODE
+                    self._status[HDR_RESPONSECLAUSE] = EXCP_NOTFOUND
                   
         self._status[HDR_FROM] = get_self_address()
         self._status[HDR_TIME] = req_time
@@ -132,7 +137,10 @@ class AdManager():
             "{}.{}".format(HDR_DATA, HDR_LOCATION) : devloc }
         #print ("Filter for getting device id = {}".format(filter))
         devidresult = DBManager.find_one(DB_ADS_COLN, filter)
-        return devidresult[DBHDR_DEVID]
+        if devidresult is None:
+            return None
+        else:
+            return devidresult[DBHDR_DEVID]
 
     def get_location(self, devname, devid):
         filter = {DBHDR_DEVID : devid}
@@ -160,7 +168,6 @@ class AdManager():
 
     def get_all_devices(self):
 
-        
         if self._pubmgr == None :
           from .Publishee import Publishee
           self._pubmgr = Publishee.get_publishee() 
@@ -179,6 +186,7 @@ class AdManager():
                     devdetails[HDR_NODETYPE] = data[HDR_NODETYPE]
                     devdetails[HDR_ISACTIVE] = isactive
                     val = "" 
+                    tm = -1
                     if devdetails[HDR_NODETYPE] == NODETYPE_SENSOR :
                         #find all the return values for this sensor
                         all_returns = list(data[HDR_RETURN].keys())
@@ -187,11 +195,15 @@ class AdManager():
                             queryparam = all_returns[0]
                             val = self._pubmgr.get_latest_reading(devdetails[HDR_NAME], 
                                 devdetails[HDR_LOCATION], queryparam)
+                            tm = self._pubmgr.get_latest_reading_time(
+                                devdetails[HDR_NAME], devdetails[HDR_LOCATION])
 
                             # Issue #73 still exists and has to be addressed
                     else :
                         val = "" #We'll see how to handle last state of actuator later on
+                        tm = -1 
                     devdetails[HDR_VALUE] = val 
+                    devdetails[HDR_TIME] = tm
                     alldevs.append(devdetails)
         return alldevs             
                 

@@ -207,9 +207,14 @@ class FirebaseManager(threading.Thread) :
 
           self.__check_appmodified()
         except Exception as e:
-          print("Error in main loop of firebase manager - {}".format(e))
-          traceback.print_exc
-          pass # Just ignore this time and try again
+          if self.retry :
+            print("Error in main loop of firebase manager - {}".format(e))
+            traceback.print_exc
+            pass # Just ignore this time and try again
+          else : 
+            print("Error in main loop of firebase manager - {}.This is a fatal error. Will not try again".format(e))
+            
+            break
         time.sleep(1)
     
     def __check_appmodified(self):

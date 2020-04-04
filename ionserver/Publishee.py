@@ -52,16 +52,27 @@ class Publishee():
 
   def receive_data(self, pubkeys):
     self._pubdict = pubkeys
-    print("Received data = {}".format(pubkeys))
+    #print("Received data = {}".format(pubkeys))
     self._status = copy.deepcopy(pubkeys)
     self._expires = 0 
     req_time = int(time.time())
     devid = self._pubdict[HDR_DEVID]
     mid = self._pubdict[HDR_MSGID]
     reqd_reg = self._reg.get_registration(devid, keytype=DBHDR_DEVID)
+    in_key = None
+    if HDR_KEY in pubkeys:
+      in_key = pubkeys[HDR_KEY]
+      del self._status[HDR_KEY]
+    else :
+      in_key = None
+    
     if (reqd_reg is None) :
         self._status[HDR_TYPE] = EXCP_FORBIDDEN_CODE
         self._status[HDR_RESPONSECLAUSE] = EXCP_FORBIDDEN
+    elif reqd_reg[HDR_KEY] != in_key:
+        print("Incoming key={}. Key as per registrar={}".format(in_key, reqd_reg[HDR_KEY]))
+        self._status[HDR_TYPE] = EXCP_UNAUTH_CODE
+        self._status[HDR_RESPONSECLAUSE] = EXCP_UNAUTH_FIN
     else :
         self._status[HDR_TYPE] = STATUS_ACCEPTED_CODE
         self._status[HDR_RESPONSECLAUSE] = STATUS_ACCEPTED
@@ -99,17 +110,43 @@ class Publishee():
           ec.set_event(devid, db_dict[HDR_NAME], pubdata)
           ec.start()
 
-    del self._status[HDR_KEY]
+    
     del self._status[HDR_DATA]
     self._status[HDR_FROM] = get_self_address()
     self._status[HDR_TIME] = req_time
 
-  def get_latest_reading(self, thingname, thinglocation, queryparam):
+  def get_latest_reading(self, thingname, thinglocation, queryparam=None):
     devid = self._admgr.get_deviceid (thingname, thinglocation)
-    sensorfilter = {DBHDR_DEVID : devid, HDR_NAME  : thingname}
-    lastresult = DBManager.find_first(DB_PUBLISHEE_COLN, sensorfilter)
-    reqd_paramvalue = lastresult[HDR_DATA][queryparam]
+    reqd_paramvalue = None
+    if devid is None:
+      reqd_paramvalue = None 
+    else :
+      sensorfilter = {DBHDR_DEVID : devid, HDR_NAME  : thingname}
+      lastresult = DBManager.find_first(DB_PUBLISHEE_COLN, sensorfilter)
+      if lastresult is None:
+        reqd_paramvalue = None
+      else:
+        if queryparam is None:
+          reqd_paramvalue = lastresult[HDR_DATA]
+        else :
+          reqd_paramvalue = lastresult[HDR_DATA][queryparam]
     return reqd_paramvalue
+
+  # The right way is to club the below method with the get_latest_reading and 
+  # return a list or a tuple. However as of this writing we don't have a robust
+  # test suite for this and hence splitting 
+  def get_latest_reading_time(self, thingname, thinglocation):
+    devid = self._admgr.get_deviceid (thingname, thinglocation)
+    if devid is None:
+      reqd_paramtime = -1
+    else :
+      sensorfilter = {DBHDR_DEVID : devid, HDR_NAME  : thingname}
+      lastresult = DBManager.find_first(DB_PUBLISHEE_COLN, sensorfilter)
+      if (lastresult is None):
+        reqd_paramtime = -1
+      else :
+        reqd_paramtime = lastresult[HDR_TIME]
+    return reqd_paramtime
 
 
   def response(self) :

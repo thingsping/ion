@@ -118,7 +118,8 @@ def receive():
   can address the security concerns). So find out if the request was
   from localhost or not
   '''
-  if ( remoteaddr == "127.0.0.1" or remoteaddr == "localhost" ):
+  if ( remoteaddr == "127.0.0.1" or remoteaddr == "localhost" \
+        or remoteaddr==get_self_address()):
     isLocal = True
   else :
     isLocal = False 
@@ -196,8 +197,41 @@ def receive():
       retstring = "Unknown message type %s\n" %(reqtype)
       print("Received unknown message = {}, or invalid sender - {} or " \
       "invalid referrer - {}".format(reqtype, remoteaddr, referrer) )  
-
   
+  elif reqtype == TYPE_GETSUMMARY :
+    # Either referrer or sender has to be the same as this machine
+
+    retjson = {}
+    if isLocal or referrer==get_self_address() or referrer == config[CKEY_SERVERFQDN] or \
+       remoteaddr==get_self_address():
+      del msg[HDR_TYPE]
+      retjson[HDR_TYPE] = STATUS_OK_CODE
+      
+      ad = AdManager.get_AdManager() 
+      pub = Publishee.get_publishee() 
+      if HDR_NAME in msg and HDR_LOCATION in msg: 
+        thingname = msg[HDR_NAME]
+        thinglocation = msg[HDR_LOCATION]
+        
+        retjson[HDR_TIME] = pub.get_latest_reading_time(thingname, thinglocation)
+
+        lastreading = pub.get_latest_reading(thingname, thinglocation)
+        if (lastreading is None): 
+          retjson[HDR_TYPE] = EXCP_NOTFOUND_CODE
+        else :
+          retjson[HDR_DATA] = lastreading
+      else :
+        locationsarray = ad.get_all_locations()
+        devdetails = ad.get_all_devices()
+        retjson[HDR_LOCATIONS] = locationsarray
+        retjson[HDR_DEVICES] = devdetails 
+        #print("Result = {}".format(dataarr))
+      retstring = json.dumps(retjson, skipkeys=True)
+    else :
+      retjson[HDR_TYPE] = EXCP_FORBIDDEN_CODE      
+      retstring = json.dumps(retjson, skipkeys=True)
+
+
   
   else : 
     retstring = "Unknown message type %s\n" %(reqtype)

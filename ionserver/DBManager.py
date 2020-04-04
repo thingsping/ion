@@ -99,9 +99,14 @@ class DBManager():
     def find_first(colnname, filter):
         #print ("Filter = {}".format(filter))
         coln = DBManager.getCollection(colnname)
-        res = coln.find(filter).sort(HDR_TIME, pymongo.DESCENDING)
-        if (res is not None):
-            return res[0]
-        else:
-            return None 
-        
+        docsize = coln.count_documents(filter)
+        found = None
+        if (docsize != 0 ):
+            res = coln.find(filter).sort(HDR_TIME, pymongo.DESCENDING)
+            if (res is not None):
+                found = res[0]
+            else:
+                found = None 
+        else : 
+            found = None
+        return found

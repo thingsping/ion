@@ -42,19 +42,13 @@ class CredsManager():
     def __init__(self): 
         self.credscoln = DBManager.getGlobalCollection(DB_CREDS_COLN)
 
-    def check_device(self, devid, key, hasher=None): 
+    def check_device(self, devid, key): 
         devquery = { DBHDR_DEVID : devid}
         devresult = self.credscoln.find_one(devquery)
         if (devresult is None):
             raise ForbiddenException() 
         else :
             dbkey = devresult[HDR_KEY]
-            isauth = False
-            if hasher is None:
-                isauth = (dbkey == key )
-            else : 
-                str = "{}|{}".format(dbkey, hasher)
-                dbhash = hashlib.md5(str.encode()).hexdigest()
-                isauth = (dbhash == key)
+            isauth = (dbkey == key)
             return isauth
             

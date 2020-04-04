@@ -45,8 +45,17 @@ class Registrar():
   def __init__(self): 
     self._status = None
     self._tempregdict = {}
+    self._creds = CredsManager.getCredsManager()
     #self._regcoln = DBManager.getCollection(DB_REGS_COLN)
-   
+
+  # As of now, it looks silly to have this method as a part of the Registrar. 
+  # However when we support hash based authentication, it will become the right thing 
+  # to do. With each registration, the registrar will give a unique hasher to each device
+  # and verify registration. With this in place, it would be the sane thing to do - putting
+  # auth checking as a part of the registrar
+  def isAuthenticated(self, devid, key):
+    return self._creds.check_device(devid, key)  
+
   def register(self, regkeys):
     self._regdict = regkeys
     self._status = copy.deepcopy(regkeys)
@@ -54,14 +63,14 @@ class Registrar():
     del self._status[HDR_EXPIRES]
     del self._status[HDR_KEY]
     req_time = int(time.time())
-    creds = CredsManager.getCredsManager()
+    
     # First check if there was an initial request for this devid without key
     mid = self._regdict[HDR_MSGID]
     if (mid in self._tempregdict):
       print("In this version we don't support HASH based authentication")
     else : 
       try : 
-        self.isAuth = creds.check_device(self._regdict[HDR_DEVID], self._regdict[HDR_KEY])  
+        self.isAuth = self.isAuthenticated(self._regdict[HDR_DEVID], self._regdict[HDR_KEY])
         if (self.isAuth):
           self._expires = self._regdict[HDR_EXPIRES]
           self._status[HDR_TYPE] = STATUS_OK_CODE
@@ -93,8 +102,9 @@ class Registrar():
           self._status[HDR_RESPONSECLAUSE] = EXCP_UNAUTH_FIN
 
       except ForbiddenException as e :
-        self._status[HDR_TYPE] = e.code()
-        self._status[HDR_RESPONSECLAUSE] = e.message()
+         self._status[HDR_TYPE] = e.code()
+         self._status[HDR_RESPONSECLAUSE] = e.message()
+
       self._status[HDR_FROM] = get_self_address()
       self._status[HDR_TIME] = req_time
 
@@ -144,7 +154,8 @@ class Registrar():
               #data = res[HDR_DATA]
               data[HDR_DEVID] = res[DBHDR_DEVID]
               data[HDR_CONTACT] = reg[HDR_FROM]
-              data[HDR_EXPIRES] = reg[HDR_EXPIRES]
+              cur_time = int(time.time())
+              data[HDR_EXPIRES] = reg[HDR_EXPIRES] -cur_time
               datas.append(data)
       return datas
 
