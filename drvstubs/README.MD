@@ -182,7 +182,7 @@ In the tests, we have to do a few steps to verify this:
     
     ``` 
     Run the script
-    python3 createcredentials.py
+    python3 createsubscriptions.py
     ```
     
     You should see the message 
