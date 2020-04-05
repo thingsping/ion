@@ -117,7 +117,8 @@ To run registration tests, you have to run the test utility script twice with di
 ```
     python3 test_utility.py -ra 
 ```
-    - If all goes well you should see all tests passed (21 as of current writing)
+- If all goes well you should see all tests passed (21 as of current writing)
+    
 ```
 ========================
 { "Pass":21, "Fail":0}
