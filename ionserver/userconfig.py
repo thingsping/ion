@@ -31,4 +31,7 @@ config = {
     CKEY_FBDBURL : "put_url_of_firebase",
     CKEY_SERVERFQDN : "FQDN_of_server",
     CKEY_POLLRESPPORT : 10560, 
+    CKEY_EVTCORD_HOST : "evtcoordinator-localhost" ,
+    CKEY_EVTCORD_KEY : "evtc#loc@12$#1"
+
 }

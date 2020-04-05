@@ -25,6 +25,7 @@ from .constants import *
 from .DBManager import DBManager
 from .Registrar import Registrar
 from .FirebaseManager import FirebaseManager
+from .IonExceptions import * 
 import copy, json, time
 
 class AdManager():
@@ -84,6 +85,7 @@ class AdManager():
 
     def query(self, reqkeys, get_key=False):
         self._status = copy.deepcopy(reqkeys)
+        print(self._status)
         devid = reqkeys[HDR_TARGET]
         del self._status[HDR_TARGET]
         del self._status[HDR_MSGID]
@@ -111,22 +113,34 @@ class AdManager():
                 self._status[HDR_TYPE] = EXCP_NOTFOUND_CODE
                 self._status[HDR_RESPONSECLAUSE] = EXCP_NOTFOUND
             else :
-                datas = self._reg.get_query_item(reqd_regs)
-                datacount = 0 
-                for data in datas :
-                    if (data is not None):
-                        #Key will ONLY be send in case of individual queries
-                        if(get_key):
-                            data[HDR_KEY] = reqd_regs[HDR_KEY]
-                        dataarr.append(data)
-                        datacount = datacount + 1
-                if (datacount != 0 ):
-                    self._status[HDR_DATA] = dataarr
-                    self._status[HDR_TYPE] = STATUS_OK_CODE
-                    self._status[HDR_RESPONSECLAUSE] = STATUS_OK
-                else : 
-                    self._status[HDR_TYPE] = EXCP_NOTFOUND_CODE
-                    self._status[HDR_RESPONSECLAUSE] = EXCP_NOTFOUND
+                isAuth = False 
+                if not HDR_KEY in self._status :
+                    isAuth = False
+                else:
+                    try:
+                        isAuth =self._reg.isAuthenticated(self._status[HDR_DEVID], self._status[HDR_KEY])
+                    except ForbiddenException: 
+                        isAuth = False
+                if (isAuth):
+                    datas = self._reg.get_query_item(reqd_regs)
+                    datacount = 0 
+                    for data in datas :
+                        if (data is not None):
+                            #Key will ONLY be send in case of individual queries
+                            if(get_key):
+                                data[HDR_KEY] = reqd_regs[HDR_KEY]
+                            dataarr.append(data)
+                            datacount = datacount + 1
+                    if (datacount != 0 ):
+                        self._status[HDR_DATA] = dataarr
+                        self._status[HDR_TYPE] = STATUS_OK_CODE
+                        self._status[HDR_RESPONSECLAUSE] = STATUS_OK
+                    else : 
+                        self._status[HDR_TYPE] = EXCP_NOTFOUND_CODE
+                        self._status[HDR_RESPONSECLAUSE] = EXCP_NOTFOUND
+                else :
+                    self._status[HDR_TYPE] = EXCP_FORBIDDEN_CODE
+                    self._status[HDR_RESPONSECLAUSE] = EXCP_FORBIDDEN
                   
         self._status[HDR_FROM] = get_self_address()
         self._status[HDR_TIME] = req_time

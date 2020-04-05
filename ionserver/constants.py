@@ -125,6 +125,8 @@ CKEY_FBSERVICEFILE = "FirebaseServiceFile"
 CKEY_FBDBURL = "FirebaseUrl"
 CKEY_POLLRESPPORT = "ControlPollPort"
 CKEY_SERVERFQDN = "ServerFQDN"
+CKEY_EVTCORD_HOST = "Eventcoordhost" 
+CKEY_EVTCORD_KEY = "Eventcoordkey"
 OSKEY_FBSERVICEFILE = "FIREBASESERVICEFILE"
 
 def get_self_address():

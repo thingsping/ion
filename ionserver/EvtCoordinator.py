@@ -25,6 +25,7 @@ from .constants import *
 from .DBManager import DBManager
 from .AdManager import AdManager
 from .HttpSender import HttpSender
+from .userconfig import config
 
 class EvtCoordinator(threading.Thread):
 
@@ -77,7 +78,9 @@ class EvtCoordinator(threading.Thread):
                 query_dict[HDR_MSGID] = "evtcordinator-{}".format(req_time)
                 query_dict[HDR_TYPE] = TYPE_QUERY
                 query_dict[HDR_FROM] = "localhost"
-                query_dict[HDR_DEVID] = "evtcoordinator-localhost"
+                query_dict[HDR_DEVID] = config[CKEY_EVTCORD_HOST]
+                query_dict[HDR_KEY] = config[CKEY_EVTCORD_KEY]
+
                 query_dict[HDR_TARGET] = req_devid
                 query_dict[HDR_TIME] = req_time
                 devdetails = admgr.query(query_dict, get_key=True)
