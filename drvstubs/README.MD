@@ -9,7 +9,7 @@ The createcredentials.py python file takes care of this. Just execute:
   'python3 createcredentials.py`
 This will create the credentials of a few dummy devices. 
 
-#### Testing Utility ####
+### Testing Utility ###
 To test the server for protocol compliance, we have a simple set of test utilities. 
 Please note that this test utility is evolving over time and we are adding test features to this without much planning. Therefore, please don't expect it to be robust or user-friendly. 
 
@@ -107,3 +107,19 @@ Each json element has one or more of the following keys:
     
 ##### Example format for test json files #####
 The directories adtest and regtests have test data files. Take a look at these to get a better understanding of the format. 
+
+### Running Tests ###
+#### Registration Tests ####
+
+To run registration tests, you have to run the test utility script twice with different options:
+
+- Create registrations for all entities
+    - ```
+python3 test_utility.py -ra 
+```
+    - If all goes well you should see all tests passed (21 as of current writing)
+```
+========================
+{ "Pass":21, "Fail":0}
+========================
+```
