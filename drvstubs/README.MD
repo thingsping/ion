@@ -114,8 +114,8 @@ The directories adtest and regtests have test data files. Take a look at these t
 To run registration tests, you have to run the test utility script twice with different options:
 
 - Create registrations for all entities
-    - ```
-python3 test_utility.py -ra 
+```
+    python3 test_utility.py -ra 
 ```
     - If all goes well you should see all tests passed (21 as of current writing)
 ```
