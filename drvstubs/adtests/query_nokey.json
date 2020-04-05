@@ -1,0 +1,23 @@
+[
+  {
+    "meta" : {
+      "Name" : "Query with no key", 
+      "Desc" : "Query from an authorized entity should fail with 403 if the entity does not send its KEY in the query",
+      "Precondition" : ["file:///./regquery", "file:///./regadv_Idev1"]
+    }
+  },
+  {
+        "iondata" : {
+            "Ver" : "0.8", "Mid" : "query0011", 
+            "Type" : "QUERY",  
+             "From" : "localhost",
+             "Nid"  : "querylocalhost",
+             "TargetId" : "Idev1", 
+             "Time" : "$rtime"
+        }, "exp" : ["TYPE403"]
+    }
+  ]
+
+
+
+  

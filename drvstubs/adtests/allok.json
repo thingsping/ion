@@ -1,35 +1,17 @@
 [
-    {
-      "iondata" : {      
-         "Type": "Register", "Expires" : 3600,
-         "From" : "10.1.1.18", 
-         "Nid" : "Idev1", 
-         "Key" : "keyIdev1", 
-         "Mid" : "Idev1_001",
-         "Time" : "$time"
-      }
-    }, { 
-      "iondata" : {
-      "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.18",
-      "Nid" : "Idev1", 
-      "Mid" : "Idev1_001", 
-      "Time" : "$time", 
-      "Key" : "keyIdev1", 
-      "Data" : [{  
-          "Name" : "MotionSensor1", "NodeType" : "Sensor", 
-          "Location" : "Front door",
-          "Capabilities" :["Detect Motion"],
-          "Return" : {
-              "MotionDetected" : "Boolean"
-            }
-          }]
-      }, "exp" : ["TYPE202"]
-    }, 
+  {
+    "meta" : {
+      "Name" : "A proper advertisement from a sensor", 
+      "Desc" : "Test checks if we get a 200OK for the subsequent query with all info as expected",
+      "Precondition" : ["file:///./regquery", "file:///./regadv_Idev1"]
+    }
+  },
     {
         "iondata" : {
             "Ver" : "0.8", "Mid" : "query0011", 
             "Type" : "QUERY",  "From" : "localhost",
              "Nid"  : "querylocalhost",
+             "Key" : "keyquerylocalhost", 
              "TargetId" : "Idev1", 
              "Time" : "$time"
         }, 

@@ -18,7 +18,8 @@
             }       
             ], "ControlMethod" : "Poll"
         }
-    },
+    }, 
+
     { 
         "iondata" : {  "Type": "Register", 
         "Expires" : 3600,   "From" : "10.1.1.21", "Nid" : "Odev1",  "Key" : "keyOdev1", 
@@ -37,7 +38,8 @@
                 "Parameters" :  {"Sound Track" : "String"}, "Action" : "Play"
             }
          ], "ControlMethod" : "Poll"
-        }
+        },
+        "exp" : ["TYPE202"]
     },
     {
         "iondata" : {  "Type": "Register", 
@@ -53,7 +55,8 @@
             "Name" : "WaterLevel1", "NodeType" : "Sensor", "Location" : "Tank",
             "Return" : {"WaterLevel" : "Int"}
             }], "ControlMethod" : "Poll"
-        }
+        },
+        "exp" : ["TYPE202"]
     },
     { 
         "iondata" : {  "Type": "Register", 
@@ -69,7 +72,8 @@
                 "Parameters" : {"State" : "Boolean"},  "Action" : "Switch"
             }       
          ], "ControlMethod" : "Poll"
-        }
+        },
+        "exp" : ["TYPE202"]
     },
     {
         "iondata" : {  "Type": "Register", 
@@ -91,7 +95,8 @@
                     "Return" : {"Gas Detected" : "Boolean"}
                 }
             ], "ControlMethod" : "Poll"
-        }
+        },
+        "exp" : ["TYPE202"]
     },
     {
         "iondata" : {  "Type": "Register", 
@@ -109,7 +114,8 @@
                 "Parameters" :  {"State" : "Boolean"} ,  "Action" : "Switch"
                 }
             ], "ControlMethod" : "Poll"
-        }
+        },
+        "exp" : ["TYPE202"]
     },
     {
         "iondata" : {  "Type": "Register", 
@@ -128,7 +134,8 @@
                 "Return" : {"MotionDetected" : "Boolean"}
                 }
             ], "ControlMethod" : "Poll"
-        }
+        },
+        "exp" : ["TYPE202"]
     },
     {
             "iondata" : {  
@@ -150,7 +157,8 @@
                         "Parameters" : {"Beep Time" : "Int", "Interval" : "Int"},  "Action" : "Beep"
                     }
                 ], "ControlMethod" : "Poll"
-            }
+            },
+        "exp" : ["TYPE202"]
     },
     {
             "iondata" : {  
@@ -168,7 +176,8 @@
                     "Parameters" : {"Message" : "String", "Recipient" : "String"},  "Action" : "Send SMS"
                     }
                 ], "ControlMethod" : "Poll"
-            }
+            },
+        "exp" : ["TYPE202"]
     },
     {
         "iondata" : {  
@@ -188,7 +197,8 @@
                 "Return" : {"Card data" : "String"}
                 }
             ], "ControlMethod" : "Poll"
-        }
+        },
+        "exp" : ["TYPE202"]
     },
     {
         "iondata" : {  "Type": "Register", 
@@ -206,8 +216,51 @@
                 "Parameters" :  {"State" : "Boolean"} ,  "Action" : "Unlock"
                 }
             ], "ControlMethod" : "Poll"
+        },
+        "exp" : ["TYPE202"]
+    },
+    {
+        "iondata" :{
+        "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.21",
+        "Nid" : "Odev1", "Mid" : "Odev1_ctl_002", "Time" : "$rtime", 
+        "Key" : "keyOdev1"
         }
-    }
+    },
+        {
+        "iondata" :{
+        "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.22",
+        "Nid" : "Odev2", "Mid" : "Odev2_ctl_002", "Time" : "$rtime", 
+        "Key" : "keyOdev2"
+        }
+    },
+        {
+        "iondata" :{
+        "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.23",
+        "Nid" : "Odev3", "Mid" : "Odev3_ctl_002", "Time" : "$rtime", 
+        "Key" : "keyOdev3"
+        }
+    },
+        {
+        "iondata" :{
+        "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.24",
+        "Nid" : "Odev4", "Mid" : "Odev4_ctl_002", "Time" : "$rtime", 
+        "Key" : "keyOdev4"
+        }
+    },
+        {
+        "iondata" :{
+        "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.25",
+        "Nid" : "Odev5", "Mid" : "Odev5_ctl_002", "Time" : "$rtime", 
+        "Key" : "keyOdev5"
+        }
+    },
+        {
+        "iondata" :{
+        "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.26",
+        "Nid" : "Odev6", "Mid" : "Odev6_ctl_002", "Time" : "$rtime", 
+        "Key" : "keyOdev6"
+        }
+    }    
 
 
 ]

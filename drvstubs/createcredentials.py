@@ -17,7 +17,8 @@ dbclient = pymongo.MongoClient("mongodb://localhost:27017/")
 db = dbclient["thingspingion"]
 coln = db["credentials"]
 coln.drop()
-credsdata = [{
+credsdata = [
+    {
         "DevId" : "Idev1",
         "Key" : "keyIdev1", 
         "Name" : "PIR1", 
@@ -148,6 +149,20 @@ credsdata = [{
         "Key" : "keyPiPlayer_1", 
         "Name" : "PiPlayer_1", 
         "Type" : "MediaPlayer", 
+        "Owner" : None
+    },
+    {
+        "DevId" : "querylocalhost",
+        "Key" : "keyquerylocalhost", 
+        "Name" : "Localhost querier", 
+        "Type" : "Dummy", 
+        "Owner" : None
+    },
+    {
+        "DevId" : "evtcoordinator-localhost",
+        "Key" : "evtc#loc@12$#1", 
+        "Name" : "Localhost querier", 
+        "Type" : "Dummy", 
         "Owner" : None
     }
     

@@ -1,36 +1,17 @@
 [
-    {
-      "iondata" : {      
-         "Type": "Register", "Expires" : 3600,
-         "From" : "10.1.1.28", 
-         "Nid" : "Odev1", 
-         "Key" : "keyOdev1", 
-         "Mid" : "Odev1_001",
-         "Time" : "$time"
-      }
-    }, 
-    { 
-      "iondata" : 
-      {
-        "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.28",
-        "Nid" : "Odev1", 
-        "Mid" : "Odev1_001", 
-        "Time" : "$time", 
-        "Key" : "keyOdev1", 
-        "Data" : [{  
-            "Name" : "Exhaust Fan#1", "NodeType" : "OutputDevice", 
-            "Location" : "Kitchen",
-            "Action" : "Switch",
-            "Capabilities" :["Fan Control"],
-            "Parameters" : {"State" : "Boolean"}
-            }]
-        }, "exp" : ["TYPE202"]
-    },
-    {
+  {
+    "meta" : {
+      "Name" : "A proper advertisement from an output device", 
+      "Desc" : "",
+      "Precondition" : ["file:///./regquery", "file:///./regadv_Odev1"]
+    }
+  },
+  {
         "iondata" : {
             "Ver" : "0.8", "Mid" : "query0011", 
             "Type" : "QUERY",  "From" : "localhost",
              "Nid"  : "querylocalhost",
+             "Key" : "keyquerylocalhost",
              "TargetId" : "Odev1", 
              "Time" : "$time"
         }, "exp" : [{ 

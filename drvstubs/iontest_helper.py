@@ -1,10 +1,11 @@
-import importlib, time, requests,copy, json, pymongo, argparse
+import importlib, time, requests,copy, json, pymongo, argparse, os
 
 importlib.import_module("testconstants")
 from testconstants import *
 
 passcount = 0 
 failcount = 0 
+skipcount = 0 
 rtime = 0 
 
 dbclient = pymongo.MongoClient("mongodb://localhost:27017/") 
@@ -14,7 +15,7 @@ coln_ad = db["advertisements"]
 coln_publish = db["publisheddata"]
 
 def get_results():
-    return (passcount, failcount)
+    return (passcount, failcount, skipcount)
 
 def get_response(server, reg_req):
     global rtime
@@ -48,8 +49,18 @@ def delete_keys_from_dict(dict_del, lst_keys):
                 delete_keys_from_dict(dict_del[field], lst_keys)
     return dict_del    
 
-def test_helper(server, regdata, allexpected=None, failures=None):
-    global passcount, failcount, rtime
+def test_helper(server, regdata, allexpected=None, failures=None, notestcount=False):
+        
+    global rtime, passcount, failcount, skipcount
+    
+    if  notestcount: 
+        # This entire stuff is thanks to a screwed up design. It started its life as 
+        # a simple utility for sending messages. Then the utility got split into multiple files
+        # Change this to a class.
+       oldpasscount = passcount
+       oldfailcount = failcount
+        
+        
     if failures is None:
         failure_msg = []
     else :
@@ -164,6 +175,15 @@ def test_helper(server, regdata, allexpected=None, failures=None):
                 #print("Unknown exp value - {}".format(exp))
                 failure_msg.append(("Check expected value", 
                    "Don't know how to handle - {}".format(exp) ))
+
+    if  notestcount: 
+        # This entire stuff is thanks to a screwed up design. It started its life as 
+        # a simple utility for sending messages. Then the utility got split into multiple files
+        # Change this to a class.
+        passcount = oldpasscount
+        if (failcount != oldfailcount):
+            skipcount = skipcount + 1
+        failcount = oldfailcount
     return failure_msg
 
 def test_from_template(server, reg_tpl_dict, ctr, exp_code, devname, testname="", key=None):
@@ -198,20 +218,40 @@ def test_from_template(server, reg_tpl_dict, ctr, exp_code, devname, testname=""
         failure_msg.append((exp_code, resptype))
     return failure_msg    
 
-def test_file(server, regfile):           
+def test_file(server, regfile, notestcount=False):           
     failures=[]
     with open(regfile) as json_file:  
         data = json.load(json_file)
         if (type(data) is list):
             for item in data:
-                if ("meta" in item):
-                    print("For future use - {}".format(item))
+                if ("meta" in item):                    
+                    metaitem = item["meta"]
+                    if "Precondition" in metaitem:
+                        preconds = metaitem["Precondition"]
+                        # to start with we'll just run files as preconditions
+                        prefailed=False 
+                        for precond in preconds:
+                            if (precond.startswith("file:///")):
+                                flen = len("file:///")
+                                #precond[flen:]
+                                prefile ="{}/{}".format(os.path.dirname(regfile), precond[flen:])
+                                print("Precondition file = {}".format( prefile))
+                                prefailures = test_file(server, prefile, notestcount=True)
+                                if (len(prefailures) != 0 ):
+                                    print("Precondition {} for test {} failed!\nFailures={}\n Skipping test".format(
+                                        prefile, regfile, prefailures
+                                    ))  
+                                    prefailed = True                            
+                                    break
+                        if prefailed:
+                            break 
+                    print("Name/Desc to be used in future for building robust test suites - {}".format(item))
                 if ("iondata" in item):
                     regdata = item["iondata"]
                     exp = None
                     if ("exp" in item):
                         exp = item["exp"]
-                    failures = test_helper(server, regdata, exp, failures)
+                    failures = test_helper(server, regdata, exp, failures, notestcount=notestcount)
                 elif ("sleep" in item):
                     sltime = item["sleep"]
                     time.sleep(sltime)
@@ -226,7 +266,7 @@ def test_file(server, regfile):
                 exp = data["exp"]
             else:
                 exp = None
-            failures=test_helper(server, regdata, exp)      
+            failures=test_helper(server, regdata, exp, notestcount=notestcount)      
 
         else :
             print("Unknown content in file")

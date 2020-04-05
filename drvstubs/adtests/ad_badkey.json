@@ -14,7 +14,7 @@
           "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.102",
           "Nid" : "Idev8", 
           "Mid" : "Idev8001", 
-          "Time" : 55343213711, 
+          "Time" : "$time", 
           "Key" : "keyBAD", 
           "Data" : [{  
               "Name" : "TemperatureSensor", "NodeType" : "Sensor", 
@@ -33,7 +33,8 @@
             "Type" : "QUERY",  "From" : "localhost",
              "Nid"  : "querylocalhost",
              "TargetId" : "Idev8", 
-             "Time" : 53434343443433
+             "Key" : "keyquerylocalhost",
+             "Time" : "$time"
         }, "exp" : ["TYPE404"]
     }
   ]

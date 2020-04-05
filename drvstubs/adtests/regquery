@@ -1,0 +1,13 @@
+[
+    {
+    "iondata" : {      
+       "Type": "Register", "Expires" : 3600,
+       "From" : "localhost", 
+       "Nid" : "querylocalhost", 
+       "Key" : "keyquerylocalhost", 
+       "Mid" : "keyquerylocalhost_001",
+       "Time" : "$time"
+    }, 
+    "exp" : ["TYPE200"]
+  }
+]

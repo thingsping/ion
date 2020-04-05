@@ -29,6 +29,7 @@
             "Type" : "QUERY",  "From" : "localhost",
              "Nid"  : "querylocalhost",
              "TargetId" : "Idev1", 
+             "Key" : "keyquerylocalhost",
              "Time" : "$time"
         }, "exp" :[{ 
           "Verify" :{                 

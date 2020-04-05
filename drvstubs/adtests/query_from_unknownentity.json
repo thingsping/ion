@@ -1,0 +1,24 @@
+[
+  {
+    "meta" : {
+      "Name" : "Query from unknown", 
+      "Desc" : "An entity unknown to the server tries to make a query. Server should return a 403 forbidden",
+      "Precondition" : ["file:///./regquery", "file:///./regadv_Idev1"]
+    }
+  },
+  {
+        "iondata" : {
+            "Ver" : "0.8", "Mid" : "query0011", 
+            "Type" : "QUERY",  
+             "From" : "localhost",
+             "Nid"  : "UNKNOWNGUY",
+             "Key" : "Doesn't matter",
+             "TargetId" : "Idev1", 
+             "Time" : "$rtime"
+        }, "exp" : ["TYPE403"]
+    }
+  ]
+
+
+
+  

@@ -32,6 +32,7 @@
         "Type" : "QUERY",  "From" : "localhost",
          "Nid"  : "querylocalhost",
          "TargetId" : "Idev2", 
+         "Key" : "keyquerylocalhost",
          "Time" : "$time"
     }, 
     "exp" : [{ 

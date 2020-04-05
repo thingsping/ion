@@ -2,10 +2,10 @@
   { 
       "iondata" : {      
           "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.102",
-          "Nid" : "Idev100", 
+          "Nid" : "NidNoExist", 
           "Mid" : "Idev100001", 
-          "Time" : 55343213711, 
-          "Key" : "keyBAD", 
+          "Time" : "$time", 
+          "Key" : "Doesntmatter", 
           "Data" : [{  
               "Name" : "TemperatureSensor", "NodeType" : "Sensor", 
               "Location" : "Bedroom",
@@ -23,7 +23,7 @@
             "Type" : "QUERY",  "From" : "localhost",
              "Nid"  : "querylocalhost",
              "TargetId" : "Idev100", 
-             "Time" : 53434343443433
+             "Time" : "$time"
         }, "exp" : ["TYPE404"]
     }
   ]

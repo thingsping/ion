@@ -47,6 +47,7 @@
             "Type" : "QUERY",  "From" : "localhost",
              "Nid"  : "querylocalhost",
              "TargetId" : "Odev1", 
+             "Key" : "keyquerylocalhost",
              "Time" : "$time"
         }, 
         "exp" : [{ 

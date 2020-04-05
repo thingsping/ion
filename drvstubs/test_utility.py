@@ -62,7 +62,7 @@ if __name__ == '__main__':
         traceback.print_exc()
 
     summary = get_results()
-    print ("\n========================\n{{ \"Pass\":{}, \"Fail\":{}}}".format(summary[0], summary[1]))
+    print ("\n=========================================\n{{ \"Pass\":{}, \"Fail\":{}, \"Skipped\" : {} }}".format(summary[0], summary[1], summary[2]))
     if len(failures) != 0 :
         print("\nDetails of failures:")
     for k,v in failures.items():
@@ -72,7 +72,7 @@ if __name__ == '__main__':
             print (failstring)
             
         
-    print("========================")
+    print("=============================================")
 
     
 

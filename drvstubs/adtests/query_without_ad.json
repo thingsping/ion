@@ -15,8 +15,9 @@
             "Ver" : "0.8", "Mid" : "query0011", 
             "Type" : "QUERY",  "From" : "localhost",
              "Nid"  : "querylocalhost",
+             "Key" : "keyquerylocalhost",
              "TargetId" : "Idev7", 
-             "Time" : 53434343443433
+             "Time" : "$time"
         }, "exp" : ["TYPE404"]
     }
   ]

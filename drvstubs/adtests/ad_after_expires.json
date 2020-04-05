@@ -18,7 +18,7 @@
       "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.18",
       "Nid" : "Idev1", 
       "Mid" : "Idev1_001", 
-      "Time" : 55343213711, 
+      "Time" : "$time", 
       "Key" : "keyIdev1", 
       "Data" : [{  
           "Name" : "MotionSensor1", "NodeType" : "Sensor", 
@@ -34,6 +34,7 @@
             "Ver" : "0.8", "Mid" : "query0011", 
             "Type" : "QUERY",  "From" : "localhost",
              "Nid"  : "querylocalhost",
+             "Key" : "keyquerylocalhost",
              "TargetId" : "Idev1", 
              "Time" : 53434343443433
         }, "exp" : ["TYPE404"]

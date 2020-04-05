@@ -30,6 +30,7 @@
             "Type" : "QUERY",  "From" : "localhost",
              "Nid"  : "querylocalhost",
              "TargetId" : "Idev5", 
+             "Key" : "keyquerylocalhost",
              "Time" : "$time"
         }, "exp" : ["TYPE404"]
     }

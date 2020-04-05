@@ -15,6 +15,9 @@
     }
   },
   {
+    "sleep" : 1
+  },
+  {
     "iondata" :{
       "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.28",
       "Nid" : "Odev1", "Mid" : "Odev1_ctl_001", "Time" : "$rtime", 

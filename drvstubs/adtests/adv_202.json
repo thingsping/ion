@@ -1,0 +1,35 @@
+[  
+  {
+    "meta" : {
+      "Name" : "202 for successful advertisement", 
+      "Desc" : "Test checks if we get a 202 for a succesfull advertisement"
+    }
+  },
+  {
+    "iondata" : {      
+       "Type": "Register", "Expires" : 3600,
+       "From" : "10.1.1.18", 
+       "Nid" : "Idev1", 
+       "Key" : "keyIdev1", 
+       "Mid" : "Idev1_001",
+       "Time" : "$time"
+    }
+  }, 
+  { 
+    "iondata" : {
+    "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.18",
+    "Nid" : "Idev1", 
+    "Mid" : "Idev1_001", 
+    "Time" : "$time", 
+    "Key" : "keyIdev1", 
+    "Data" : [{  
+        "Name" : "MotionSensor1", "NodeType" : "Sensor", 
+        "Location" : "Front door",
+        "Capabilities" :["Detect Motion"],
+        "Return" : {
+            "MotionDetected" : "Boolean"
+          }
+        }]
+    }, "exp" : ["TYPE202"]
+  }
+]

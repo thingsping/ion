@@ -1,0 +1,29 @@
+[
+    {
+      "iondata" : {      
+         "Type": "Register", "Expires" : 3600,
+         "From" : "10.1.1.28", 
+         "Nid" : "Odev1", 
+         "Key" : "keyOdev1", 
+         "Mid" : "Odev1_001",
+         "Time" : "$time"
+      }
+    }, 
+    { 
+      "iondata" : 
+      {
+        "Type" : "ADVERTISE" , "Ver" : "0.5", "From" : "10.1.1.28",
+        "Nid" : "Odev1", 
+        "Mid" : "Odev1_001", 
+        "Time" : "$time", 
+        "Key" : "keyOdev1", 
+        "Data" : [{  
+            "Name" : "Exhaust Fan#1", "NodeType" : "OutputDevice", 
+            "Location" : "Kitchen",
+            "Action" : "Switch",
+            "Capabilities" :["Fan Control"],
+            "Parameters" : {"State" : "Boolean"}
+            }]
+        }, "exp" : ["TYPE202"]
+    }
+]
