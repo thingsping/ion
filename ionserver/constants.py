@@ -100,6 +100,7 @@ EXCP_UNAUTH_INIT = "Provide Authentication"
 EXCP_UNAUTH_FIN = "Authentication Failed" 
 EXCP_NOTFOUND_CODE = 404
 EXCP_NOTFOUND = "Not Found"
+EXCP_BADFORMAT = 400
 
 STATUS_OK = "OK"
 STATUS_OK_CODE = 200

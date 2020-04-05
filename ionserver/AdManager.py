@@ -59,28 +59,44 @@ class AdManager():
         del self._status[HDR_DATA]
         mid = self._addict[HDR_MSGID]
         key = self._addict[HDR_KEY]
-        #First find if there is a registration with the said MID
-        reqd_regs = self._reg.get_registration(mid)
-        if (reqd_regs is None or key != reqd_regs[HDR_KEY]):
-          self._status[HDR_TYPE] = EXCP_FORBIDDEN_CODE
-          self._status[HDR_RESPONSECLAUSE] = EXCP_FORBIDDEN
-        else :
-          self._status[HDR_TYPE] = STATUS_ACCEPTED_CODE
-          self._status[HDR_RESPONSECLAUSE] = STATUS_ACCEPTED
+        allMandatory = True
+        mandatoryClause = "" 
+        for data in addata :
+            if (not HDR_LOCATION in data or not HDR_NAME in data) :
+                allMandatory = False 
+                mandatoryClause = "Name/Location not specified"                        
+                break 
+            nodetype = data[HDR_NODETYPE]
+            if nodetype == NODETYPE_SENSOR and not HDR_RETURN in data:
+                allMandatory = False
+                mandatoryClause = "Return definition not specified"
+                break
 
-          dbdict = {} 
-          dbdict[DBHDR_DEVID] = self._addict[HDR_DEVID]
-          dbdict[HDR_DATA] = addata
-          if (HDR_CONTROLMETHOD in self._addict):              
-              dbdict[HDR_CONTROLMETHOD] =self._addict[HDR_CONTROLMETHOD]
-          
-          print ("Creating/Updating an entry in the Ad db - %s" 
-              %(dbdict[DBHDR_DEVID]))
-          filter = {DBHDR_DEVID : dbdict[DBHDR_DEVID]}
-          #self._adscoln.replace_one(filter,dbdict, upsert=True)   
-          DBManager.replace_one(DB_ADS_COLN, dbdict, filter)
-          self._fbmgr.update(dbdict, TYPE_AD)
-        self._status[HDR_FROM] = get_self_address()
+        if not allMandatory:
+            self._status[HDR_TYPE] = EXCP_BADFORMAT
+            self._status[HDR_RESPONSECLAUSE] = mandatoryClause
+        else : 
+          #First find if there is a registration with the said MID
+          reqd_regs = self._reg.get_registration(mid)
+          if (reqd_regs is None or key != reqd_regs[HDR_KEY]):
+            self._status[HDR_TYPE] = EXCP_FORBIDDEN_CODE
+            self._status[HDR_RESPONSECLAUSE] = EXCP_FORBIDDEN
+          else :
+            dbdict = {} 
+            dbdict[DBHDR_DEVID] = self._addict[HDR_DEVID]
+            dbdict[HDR_DATA] = addata
+            if (HDR_CONTROLMETHOD in self._addict):              
+                dbdict[HDR_CONTROLMETHOD] =self._addict[HDR_CONTROLMETHOD]
+            
+            print ("Creating/Updating an entry in the Ad db - %s" 
+                %(dbdict[DBHDR_DEVID]))
+            filter = {DBHDR_DEVID : dbdict[DBHDR_DEVID]}
+            #self._adscoln.replace_one(filter,dbdict, upsert=True)   
+            DBManager.replace_one(DB_ADS_COLN, dbdict, filter)
+            self._status[HDR_TYPE] = STATUS_ACCEPTED_CODE
+            self._status[HDR_RESPONSECLAUSE] = STATUS_ACCEPTED
+            self._fbmgr.update(dbdict, TYPE_AD)
+            self._status[HDR_FROM] = get_self_address()
         self._status[HDR_TIME] = req_time
 
     def query(self, reqkeys, get_key=False):
