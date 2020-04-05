@@ -178,21 +178,49 @@ The lone failure is due to the protocol issue : https://github.com/thingsping/IO
 In our IONSERVER, we have not yet implemented the SUBSCRIBE-NOTIFY technique of the IONMP protocol for managing events and their associated approach. Instead we directly define the event-action relationship in the database. The server has an Event Coordinator component which continously checks if there is an event that would trigger an action. If yes, then it does the needful. 
 In the tests, we have to do a few steps to verify this:
     - create the subscription database
-    ``` Run the script
-        python3 createcredentials.py
-     ```
+    ``` 
+    Run the script
+    python3 createcredentials.py
+    ```
      You should see the message 
       ```
       Establishing DB Connection...
       Number of Subscription Items = 10
       ```
       - Now create a the registrations and advertisements required for running all scripts
-      ```python3 test_utility.py -f subscribes/subscribe_entities```
-      All tests should pass. Please note that these are not tests as such, but they are preconditions. These steps are required to ensure that all entities have been setup as required
-      ```========================
+      ```
+      python3 test_utility.py -f subscribes/subscribe_entities
+      ```
+      All tests should pass. Please note that these are not tests as such, but they are preconditions. These steps are required to ensure that all entities have been setup as required. At the end of these preconditions, we also have a bunch of POLLCONTROL messages, to ensure that there are no 'residual unconsumed` actions before the start of the tests. 
+      ```
+      ========================
       { "Pass":10, "Fail":0}
       ========================
       ```
-      
+      - The first step after this is to run the set of tests which rely on the entities having been setup as mentioned in the previous step.  To do so run the the tests      
+      ```
+      python3 test_utility.py -nd -d subscribes_nodeldb
+      ```
+      Observe here that we are passing the parameter ```-nd``` to the script. This ensures that the database is not cleaned up before the tests are run. Without this option, the database is cleaned up before the start of each test. 
+      The above set of tests verify all possible scenaris of event-action relationship . Once you run the tests you should see that all tests have passed as seen below:
+      ```
+      ========================
+      { "Pass":38, "Fail":0}
+      ========================
+      ```
+     - Finally run those event-action relationship tests that need the database to be be cleaned before running the tests 
+     ```
+     python3 test_utility.py -d subscribes/
+     ```
+     After you run these tests, you should confirm that all tests have passed and none of the tests have failed. 
+     
+     ```
+     ========================
+      { "Pass":5, "Fail":0}
+      ========================
+
+     ```
+     ```
+     
 
 
