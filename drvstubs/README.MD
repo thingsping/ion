@@ -197,7 +197,7 @@ In the tests, we have to do a few steps to verify this:
       python3 test_utility.py -f subscribes/subscribe_entities
 ```
      
-      All tests should pass. Please note that these are not tests as such, but they are preconditions. These steps are required to ensure that all entities have been setup as required. At the end of these preconditions, we also have a bunch of POLLCONTROL messages, to ensure that there are no 'residual unconsumed` actions before the start of the tests. 
+All tests should pass. Please note that these are not tests as such, but they are preconditions. These steps are required to ensure that all entities have been setup as required. At the end of these preconditions, we also have a bunch of POLLCONTROL messages, to ensure that there are no 'residual unconsumed` actions before the start of the tests. 
      
 ```
       ========================
@@ -211,9 +211,9 @@ In the tests, we have to do a few steps to verify this:
       python3 test_utility.py -nd -d subscribes_nodeldb
 ```
       
-      Observe here that we are passing the parameter ```-nd``` to the script. This ensures that the database is not cleaned up before the tests are run. Without this option, the database is cleaned up before the start of each test. 
+Observe here that we are passing the parameter ```-nd``` to the script. This ensures that the database is not cleaned up before the tests are run. Without this option, the database is cleaned up before the start of each test. 
       
-      The above set of tests verify all possible scenaris of event-action relationship . Once you run the tests you should see that all tests have passed as seen below:
+The above set of tests verify all possible scenaris of event-action relationship . Once you run the tests you should see that all tests have passed as seen below:
      
      ```
      ========================
