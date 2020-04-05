@@ -1,8 +1,8 @@
 [  
   {
     "meta" : {
-      "Name" : "Test POLLCONTROL when publish matches device but not thing", 
-      "Desc" : "We have a device that has two different sensor things - say thing1 and thing2.  we send a publish message such that it matches an event-action relationship of 'thing2'. We then send a POLLCONTROL message to query for the device. Verify that we get back data for only the correct event",
+      "Name" : "Test POLLCONTROL when publish matches one thing from device", 
+      "Desc" : "We have a device that has two different sensor things - say thing1 and thing2.  we send a publish message such that it matches an event-action relationship of 'thing2'. We then send a POLLCONTROL message to query for the device. Verify that we get back data for only the correct thing",
       "Precondition"  : "./subscribe_entities.json"
     }
   },

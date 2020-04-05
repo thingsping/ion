@@ -245,7 +245,8 @@ def test_file(server, regfile, notestcount=False):
                                     break
                         if prefailed:
                             break 
-                    print("Name/Desc to be used in future for building robust test suites - {}".format(item))
+                    if "Name" in metaitem:
+                        print("Test Name={}".format(metaitem["Name"]))                    
                 if ("iondata" in item):
                     regdata = item["iondata"]
                     exp = None

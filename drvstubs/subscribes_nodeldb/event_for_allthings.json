@@ -1,7 +1,7 @@
 [  
   {
     "meta" : {
-      "Name" : "Test POLLCONTROL when for publish matchint all things", 
+      "Name" : "Test POLLCONTROL when for publish matching all things", 
       "Desc" : "We have a device that has two different sensor things - say thing1 and thing2.  we first send a publish message such that it matches an event-action relationship of 'thing1'. We then send a publish message such that it matches an event-action relationship of 'thing2'. We then send a POLLCONTROL message to query for the device. Verify that we get back data for only the correct event",
       "Precondition"  : "./subscribe_entities.json"
     }

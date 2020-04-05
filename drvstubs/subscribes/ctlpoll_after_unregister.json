@@ -2,7 +2,7 @@
   {
     "meta" : {
       "Name" : "Test After unregister", 
-      "Desc" : "Registration has been done but while sending POLL Control we use wrong key"
+      "Desc" : ""
     
     }
   },

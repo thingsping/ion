@@ -1,0 +1,34 @@
+[
+  {
+    "meta" : {
+        "Name" : "Test ad without Name",
+        "Desc" : "This test simulates a scenario where an advertisement is sent out without the mandatory Name key. This test will currently fail due to https://github.com/thingsping/IONMP/issues/3"
+    }
+
+    },
+    {
+      "iondata" : {      
+         "Type": "Register", "Expires" : 3600,
+         "From" : "10.1.1.18", 
+         "Nid" : "Idev5", 
+         "Key" : "keyIdev5", 
+         "Mid" : "Idev5_001",
+         "Time" : "$time"
+      }
+    }, { 
+      "iondata" : {
+      "Type" : "ADVERTISE" , "Ver" : "0.8", "From" : "10.1.1.18",
+      "Nid" : "Idev1", 
+      "Mid" : "Idev5_001", 
+      "Time" : "$time", 
+      "Key" : "keyIdev5", 
+      "Data" : [{  
+          "Location" : "Bedroom", "NodeType" : "Sensor", 
+          "Capabilities" :["Detect Motion"],
+          "Return" : {
+              "MotionDetected" : "Boolean"
+            }
+          }]
+      }, "exp" : ["TYPE400"]
+    }
+  ]

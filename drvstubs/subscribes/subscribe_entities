@@ -110,7 +110,7 @@
             "Mid" : "Odev3_001", "Time" : "$time", "Key" : "keyOdev3", 
             "Data" : [
                 {  
-                "Name" : "Exhaust Fan#1", "NodeType" : "Sensor", "Location" : "Kitchen",
+                "Name" : "Exhaust Fan#1", "NodeType" : "OutputDevice", "Location" : "Kitchen",
                 "Parameters" :  {"State" : "Boolean"} ,  "Action" : "Switch"
                 }
             ], "ControlMethod" : "Poll"
@@ -212,7 +212,7 @@
             "Mid" : "Odev6_001", "Time" : "$time", "Key" : "keyOdev6", 
             "Data" : [
                 {  
-                "Name" : "DoorLock", "NodeType" : "Sensor", "Location" : "Front door",
+                "Name" : "DoorLock", "NodeType" : "OutputDevice", "Location" : "Front door",
                 "Parameters" :  {"State" : "Boolean"} ,  "Action" : "Unlock"
                 }
             ], "ControlMethod" : "Poll"

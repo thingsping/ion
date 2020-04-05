@@ -1,8 +1,8 @@
 [  
   {
     "meta" : {
-      "Name" : "Test by using the wrong key", 
-      "Desc" : "Registration has been done but while sending POLL Control we use wrong key",
+      "Name" : "Test by sending POLLCONTROL from an unknown entity", 
+      "Desc" : "",
       "Precondition"  : "./subscribe_entities.json"
     }
   },
