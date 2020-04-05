@@ -111,10 +111,14 @@ The directories adtest and regtests have test data files. Take a look at these t
 ### Running Tests ###
 The scripts and test files in the drvstubs directory are used to run various tests. 
 
-cd to drvstubs directory and run the tests as mentioned below:
+First cd to drvstubs directory 
+Then create the required credentials as mentioned in the section about credentials. That is, 
+   ```python3 createcredentials.py```
+and run the tests as mentioned below:
+
 #### Registration Tests ####
 
-To run registration tests, you have to run the test utility script twice with different options:
+Registrations tests are executed to simulate the condition where entities try to register with the ION server. To run registration tests, you have to run the test utility script twice with different options:
 
 - Create registrations for all entities
 ```
@@ -141,7 +145,7 @@ If you are wondering why there are two sets of testts, that is because we starte
 
 #### Advertisements Tests ####
 
-Run advertisement tests by calling the python script:
+Advertisement tests are used to simulate both registered and unregistered endpoints trying to advartise their capabilities to the server. Run advertisement tests by calling the python script:
 
 ```
     python3 test_utility.py -d adtests
@@ -169,4 +173,26 @@ This will simulate the ability of sensor nodes to publish data to the server and
    ========================
 ```
 The lone failure is due to the protocol issue : https://github.com/thingsping/IONMP/issues/3
+
+#### Tests for confirming the event-action relationships ####
+In our IONSERVER, we have not yet implemented the SUBSCRIBE-NOTIFY technique of the IONMP protocol for managing events and their associated approach. Instead we directly define the event-action relationship in the database. The server has an Event Coordinator component which continously checks if there is an event that would trigger an action. If yes, then it does the needful. 
+In the tests, we have to do a few steps to verify this:
+    - create the subscription database
+    ``` Run the script
+        python3 createcredentials.py
+     ```
+     You should see the message 
+      ```
+      Establishing DB Connection...
+      Number of Subscription Items = 10
+      ```
+      - Now create a the registrations and advertisements required for running all scripts
+      ```python3 test_utility.py -f subscribes/subscribe_entities```
+      All tests should pass. Please note that these are not tests as such, but they are preconditions. These steps are required to ensure that all entities have been setup as required
+      ```========================
+      { "Pass":10, "Fail":0}
+      ========================
+      ```
+      
+
 
