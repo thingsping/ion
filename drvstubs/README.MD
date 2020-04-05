@@ -153,3 +153,20 @@ All tests should pass with zero failures
     ========================
 
 ```
+#### PUBLISH tests ####
+
+Run the utility:
+```
+    python3 test_utility.py -d pubtests
+```
+This will simulate the ability of sensor nodes to publish data to the server and the server's ability to process these messages. After you run the tests, if you see that all **but one** tests have passed, then you are all good!
+```
+   ========================
+   { "Pass":40, "Fail":1}
+
+   Details of failures:
+   For test - pubtests/pub_multithing_samenames.json | Expected={'State': False}; Actual={'State': True}
+   ========================
+```
+The lone failure is due to the protocol issue : https://github.com/thingsping/IONMP/issues/3
+
