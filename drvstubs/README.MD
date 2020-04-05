@@ -109,6 +109,9 @@ Each json element has one or more of the following keys:
 The directories adtest and regtests have test data files. Take a look at these to get a better understanding of the format. 
 
 ### Running Tests ###
+The scripts and test files in the drvstubs directory are used to run various tests. 
+
+cd to drvstubs directory and run the tests as mentioned below:
 #### Registration Tests ####
 
 To run registration tests, you have to run the test utility script twice with different options:
@@ -117,10 +120,36 @@ To run registration tests, you have to run the test utility script twice with di
 ```
     python3 test_utility.py -ra 
 ```
-- If all goes well you should see all tests passed (21 as of current writing)
+    If all goes well you should see all tests passed (21 as of current writing)
     
 ```
-========================
-{ "Pass":21, "Fail":0}
-========================
+    ========================
+    { "Pass":21, "Fail":0}
+    ========================
+```
+- Run other registration tests
+```
+    python3 test_utility.py -d regtests
+```
+This should again show that all tests have passed and zero failed 
+```
+   ========================
+   { "Pass":17, "Fail":0}
+   ========================
+```
+If you are wondering why there are two sets of testts, that is because we started writing the test utility as a bunch of scripts to quickly vefify the communication. Later we started adding more features and made it more robust. Overtime, we will make -ra go away and have test templates for these too. 
+
+#### Advertisements Tests ####
+
+Run advertisement tests by calling the python script:
+
+```
+    python3 test_utility.py -d adtests
+```
+All tests should pass with zero failures
+```
+    ========================
+    { "Pass":35, "Fail":0}
+    ========================
+
 ```
