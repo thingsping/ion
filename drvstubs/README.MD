@@ -232,7 +232,26 @@ The above set of tests verify all possible scenaris of event-action relationship
       { "Pass":5, "Fail":0}
      ========================
      ```
+### Summary of test coverage ###
+The following tables summarizes the test coverage of the ION server. 
 
-
+|Feature / Protocol specification|Is Tested?|Where?|Notes|
+|---|---|---|---|
+|Credentials|![#c5f015](https://placehold.it/15/c5f015/000000?text=+)| As part of other tests|This gets tested as a part of almost all other tests|
+|REGISTER|![#c5f015](https://placehold.it/15/c5f015/000000?text=+) | Registration tests described above|
+|2 way authentication| ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) |NA|IONServer does not implement this feature yet|
+|ADVERTISEMENTS| ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)| Advertisement tests|
+|PUBLISH|![#c5f015](https://placehold.it/15/c5f015/000000?text=+)|Publish tests|
+|CONTROL|![#1589F0](https://placehold.it/15/1589F0/000000?text=+)|Event-Action tests|It becomes a bit messy to test CONTROL messages in the normal way. We have to start a socket and have some complex interactions between the test framework and this socket based utility. Instead in the event-action relationship tests, we test the POLLCONTROL method. The event coordinator sends back a CONTROL message in the exact format as it would have done if it had to directly CONTROL an end-point. Thus by testing it, we are in effect testing the message structure of the control message. |
+|SUBSCRIBE|![#f03c15](https://placehold.it/15/f03c15/000000?text=+)|NA|IONServer does not implement this feature yet|
+|NOTIFY|![#f03c15](https://placehold.it/15/f03c15/000000?text=+)|NA|IONServer does not implement this feature yet|
+|QUERY|![#c5f015](https://placehold.it/15/c5f015/000000?text=+)|Advertisement tests|While most of the advertisement tests themselves rely on the QUERY message to verify if the test passed or not, we also have some additional tests to cover negative scenarios in the adtests folder|
+|POLLCONTROL|![#f03c15](https://placehold.it/15/f03c15/000000?text=+)|Event-Action tests|In the set of tests that we have for event-action relationships, we use the POLLCONTROL message to verify if the correct action is being triggered in response to an event. 
+|CTLRESPONSE|![#f03c15](https://placehold.it/15/f03c15/000000?text=+)|NA|We have still not implemented this feature in the server|
+|Event-Action Releationship|![#c5f015](https://placehold.it/15/c5f015/000000?text=+)|Event-Action tests|
   
-
+  
+  - ##### LEGEND #####
+     - ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) Yes 
+     - ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) Indirectly
+     - ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) No
