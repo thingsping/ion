@@ -18,7 +18,7 @@ The entry point of the test utility is the test_utility.py
 This can be run with different options. Run the command with -h option and you will see the usage help on the screen. 
 
 ```
-usage: test_utility.py [-h] [-ra] [-s SERVER] [-f FILE] [-nd] [-d DIR]
+usage: test_utility.py [-h] [-ra] [-s SERVER] [-f FILE] [-nd] [-do] [-d DIR]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -27,7 +27,11 @@ optional arguments:
                         Address of server
   -f FILE, --file FILE  Choose an individual test file
   -nd, --nodbdelete     Do not clean up the db before starting tests
+  -do, --deleteonce     Cleanup the DB only once before running all tests.
+                        Without this the db will get deleted before each test
   -d DIR, --dir DIR     Run all files with extension of .json in the specified
+                        directory
+
  
 ```
 
