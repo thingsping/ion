@@ -1,13 +1,19 @@
-# ionserver
-IONMP compliant server. IONMP is an openstandard plug and play protocol for IOT nodes and servers. The specification is available as a separate repository
+# ion
+Repository for all ION compliant implementations. The ION Specification itself is a separate repository. 
+    https://github.com/thingsping/IONMP
 
+A few students from BITS Pilani's special track post graduation program on IOT, as part of our capstone project, wanted to work on an IOT platform that was protocol, vendor and hardware agnostic. Thus the IONMP Framework and the related products were born!. After some deliberation, we decided to make this into an opensource project. We started the code commit process into this opensource repository in March 2020. 
 
-=============
-Caution
-=============
+Things started moving a bit slow, mainly due to the global effect of the lockdown caused by the COVID-19 pandemic. All of us are working on our free time on the ion project and our main work schedule during these challenging times have been a bit more hectic than normal. However we still try to squeeze in some time and have been making small progress. 
 
-Code commit process for this repository started 7th March 2020. While we have implemented a large chunk of the protocol specification in our server, we will be adding files to this repository one by one. 
+Folders in this repository:
+## pythonsrv ##
+Python implementation of an IONMP compliant server. This server implements most of the important aspects of the IONMP protocol. The following parts have still not been implemented:
+- Two step authentication using MD5 Hash
+- SUBSCRIBE and NOTIFY messages
+  - Instead of the standard SUBSCRIBE, NOTIFY, in this server we use a technique where event-action relationships (which achieves the core functionality of SUBSCRIBE / NOTIFY) is embedded into the server code itself. 
+- BLOCKLY based event-action configuration
+  - We intend to push this into the repository as soon as we have the first set of client implementations / examples ready. 
 
-Till we complete the checkin of all files, the code in this repository may not be easily usable. Once we have checked in all files, we will update this readme along with instructions. At that point of time, this caution message will go away. 
-
-Why this staggered process : Truth be told, we had not thought of this as an opensource project. At Qantom software, we took a decision to make this project opensource, much after we had started work on it. Since this was initially a commercial code base, we have been using this in implementations for our clients. Before releasing into the opensource, we are carefully analysing the source code, file by file and making sure that no sensitive data is getting out to the opensource repository. 
+## espclient ##
+Work in progress - library and reference implementations for ION compliant endpoints that use the ESP8266 / ESP32 
