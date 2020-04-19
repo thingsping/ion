@@ -10,6 +10,7 @@ for testing. There are two categories of entities:
 Idev devices are input drivers , that is , to simulate sensors. 
 Odev devices are output drivers, that is, to simulate actuators. 
 
+We also have a few actual devices that we use for testing
 '''
 
 print("Establishing DB Connection...")
@@ -163,6 +164,13 @@ credsdata = [
         "Key" : "evtc#loc@12$#1", 
         "Name" : "Localhost querier", 
         "Type" : "Dummy", 
+        "Owner" : None
+    },
+    {
+        "DevId" : "2cf4327a0021",
+        "Key" : "2cf4test!@#", 
+        "Name" : "Device for test - 1", 
+        "Type" : "Test", 
         "Owner" : None
     }
     
