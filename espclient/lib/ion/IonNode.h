@@ -67,7 +67,7 @@ public :
     String getCtlPollJson() ; 
 
     long getLastRegisteredTime(){return lastRegTime ; }
-    void setLastRegisteredTime(long tm) {lastRegTime = tm/1000;} 
+    void setLastRegisteredTime(long tm) {lastRegTime = tm;} 
 
     bool hasOutputDevice() ; 
 

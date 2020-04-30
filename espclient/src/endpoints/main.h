@@ -14,7 +14,8 @@
 */
 
 //#include "endpoint1.h"
-#include "actuator_simulator.h"
+//#include "actuator_simulator.h"
+#include "irbasedswitch1.h"
 //#include "endpoint2.h"
 //...
 //#include "endpointN.h"

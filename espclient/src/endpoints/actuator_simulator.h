@@ -4,7 +4,6 @@
 #include "CcshConfig.h"
 #include "Log.h"
 #include "IonFactory.h"
-
 /* 
 * Set the following lines to match your environment details 
 * and then uncomment the following lines 
@@ -37,7 +36,6 @@ extern void endpoint_setup() {
     config -> setServer(IONSERVER); 
     config -> setSsidDetails(MYSSID, MYSSIDPWD); 
     config -> setDeviceKey(DEVICEKEY);
-
     config -> addThing("DHT1", "Bedroom", "");
     factory = new IonFactory() ; 
     Sensor dhtSimulator = factory -> createSensor("DHT1"); 
@@ -47,10 +45,7 @@ extern void endpoint_setup() {
 }
 
 extern void endpoint_loop() {
-    readDHT(&temperature, &humidity); // This will be the actual 
-            // procedure to read from the sensors. 
-    logger -> debug("Completed reading DHT . t=" + String(temperature) + 
-        "; h=" + String(humidity)); 
+    readDHT(&temperature, &humidity); // actual procedure to read     
     factory -> dispatch() ; 
     logger ->  debug("Finished dispatching..."); 
     delay(10000);

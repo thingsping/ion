@@ -248,13 +248,12 @@ String IonThing :: getReturnValuesJson() {
         //void* v1 = return_values[i];
 
         ValueType rt = returnTypes -> get(i);
-        void* v1 = returnVariables -> get(i); 
-
+        void* v1 = returnVariables -> get(i);  
         if (rt == Int ){
             int pv = *((int *)v1);
             retJson.concat(pv); 
         } else if (rt == Boolean) {
-            int pv = *((int *)v1) ; 
+            int pv = *((bool *)v1) ;  
             retJson.concat(pv ? "true" : "false" ); 
         } 
         else if (rt == Float) {

@@ -149,8 +149,7 @@ void IonServer :: handleIncoming(bool (*msgProcessor)(String)) {
     if ((millis() - lastIncomingHandled) < 100){ // Let's not do it too often 
         return ; 
     }
-    lastIncomingHandled = millis() ; 
-    
+    lastIncomingHandled = millis() ;     
     if (config -> isLocalGateway())
     {
         WiFiClient client = server -> available();
@@ -335,13 +334,13 @@ String IonServer :: sendToServer(String payload, int timeout) {
 }
 
 void IonServer :: reregisterIfNeeded() {
-    long prevRegTime = node -> getLastRegisteredTime() ; 
+    long prevRegTime = node -> getLastRegisteredTime(); 
     long curTime = millis()/1000; 
     if (prevRegTime == 0) { // That is, initial registration failed!
         logger -> error ("Initial Registration attempt has failed! Server down? Keeping it quick") ; 
         registerWithServer(10000, 1) ; 
     }
-    else if (prevRegTime > curTime || (curTime - prevRegTime)  >= DEFEXPIRESTIME/2) {
+    else if (prevRegTime/1000  > curTime || (curTime - prevRegTime/1000 )  >= DEFEXPIRESTIME/2) {
         registerWithServer(); 
     }
 }

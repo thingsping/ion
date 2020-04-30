@@ -113,7 +113,7 @@ class Registrar():
      #res = self._regcoln.find_one(filter)
      res = DBManager.find_one(DB_REGS_COLN, filter)
      if (res is None ):
-       print("No entry found at all with said filter")
+       print("No entry found at all with said filter-[{}]".format(filter))
        return None 
      expires = res[HDR_EXPIRES]
      cur_time = int(time.time())

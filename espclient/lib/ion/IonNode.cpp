@@ -210,6 +210,7 @@ String IonNode :: processControlJson(String ctljson, bool checkForAuth){
 
 void IonNode :: createRegJson(){
     if (lastRegTime == 0 ) {
+        logger -> debug("creating new registration...");
         regMid = String(deviceId); 
         regMid.concat(TYPEREG); 
         regMid.concat((int)millis()/1000); 
@@ -330,13 +331,14 @@ String IonNode :: getPublishJson() {
     adJson[HDRKEY] = hashed; 
     adJson[HDRMID] = lastMid ;
     adJson[HDRTIME] = (int)lastPubTime/1000;
-
     JsonArray dataJson = adJson.createNestedArray(HDRDATA);
     for (int i = 0 ; i < allThings -> size(); i++) {
         const char* str1; 
         IonThing* thing = allThings -> get(i) ;
-        if (thing -> getNodeType() == SensorDevice)
+        if (thing -> getNodeType() == SensorDevice){
             dataJson.add(serialized(thing -> getReturnValuesJson()));
+        }
+        yield();
     }
     String output; 
     serializeJson(adJson, output);
