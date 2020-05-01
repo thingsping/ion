@@ -23,7 +23,8 @@ def all_tests():
         test_from_template(args.server, reg_tpl_dict, ctr, 200, "Odev{}".format(ctr))
         time.sleep(.01)
 
-    test_from_template(args.server, reg_tpl_dict, 8, 401, "Odev8", key="badkey", testname="Key for device name is wrong")
+    test_from_template(args.server, reg_tpl_dict, 8, 401, "Odev8", key="badkey",  
+         testname="Key for device name is wrong")
     test_from_template(args.server, reg_tpl_dict, 12, 403, "Odev12", testname="Output device not known to server")
     test_from_template(args.server, reg_tpl_dict, 12, 403, "Idev12", testname="Input device not known to server")
 

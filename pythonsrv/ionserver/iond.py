@@ -200,21 +200,17 @@ def receive():
   
   elif reqtype == TYPE_GETSUMMARY :
     # Either referrer or sender has to be the same as this machine
-
     retjson = {}
     if isLocal or referrer==get_self_address() or referrer == config[CKEY_SERVERFQDN] or \
-       remoteaddr==get_self_address():
+      remoteaddr==get_self_address():
       del msg[HDR_TYPE]
-      retjson[HDR_TYPE] = STATUS_OK_CODE
-      
+      retjson[HDR_TYPE] = STATUS_OK_CODE      
       ad = AdManager.get_AdManager() 
       pub = Publishee.get_publishee() 
       if HDR_NAME in msg and HDR_LOCATION in msg: 
         thingname = msg[HDR_NAME]
-        thinglocation = msg[HDR_LOCATION]
-        
+        thinglocation = msg[HDR_LOCATION]        
         retjson[HDR_TIME] = pub.get_latest_reading_time(thingname, thinglocation)
-
         lastreading = pub.get_latest_reading(thingname, thinglocation)
         if (lastreading is None): 
           retjson[HDR_TYPE] = EXCP_NOTFOUND_CODE

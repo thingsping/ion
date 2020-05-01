@@ -59,10 +59,6 @@ class HttpSender(threading.Thread):
                     dct_dev = []
                 dct_dev.append(copy.deepcopy(self._json))    
                 HttpSender.PendingRequests[devid] = dct_dev
-
-                '''
-                HttpSender.PendingRequests["{}.{}".format(devid, thingname)] = copy.deepcopy(self._json)
-                '''
                 print("This device {}.{} only supports polling. will wait for poll request".format(devid, thingname))
                 pdict = {}
                 pdict[DBHDR_DEVID] = devid 
@@ -112,21 +108,6 @@ class HttpSender(threading.Thread):
         if isauth:  
             darray = []      
             send_key= None
-            '''
-            pendingcount = 0 
-            removearray = []
-            for key in HttpSender.PendingRequests.keys():
-                #High risk to fix #12
-                if (key.startswith("{}.".format(devid))):
-                    pendingcount = pendingcount + 1
-                    req = HttpSender.PendingRequests[key]
-                    send_key = req[HDR_KEY]
-                    removearray.append(key)
-                    for data in req[HDR_DATA] :
-                        darray.append(data)
-            for rem in removearray :
-                HttpSender.PendingRequests.pop(rem)                                
-                '''
             ctlfordev = HttpSender.PendingRequests.pop(devid, None)            
             if ctlfordev is not None:
                 #remember we have added all pending controls as an 

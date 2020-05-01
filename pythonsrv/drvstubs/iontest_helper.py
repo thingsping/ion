@@ -93,6 +93,7 @@ def test_helper(server, regdata, allexpected=None, failures=None, notestcount=Fa
                 # Note : we need a grace time of 1 second. Even though it is the same
                 # server, because we are using int and rounding off + given some time 
                 # for communication, there sometimes is a one second difference
+                print("Rtime = {}, expires = {}, Devid={} & res={}".format(rtime, expires, devid, res))
                 if abs(rtime + expires - res["Expires"]) <= 1 :
                     passcount = passcount + 1
                 else : 
@@ -209,12 +210,13 @@ def test_from_template(server, reg_tpl_dict, ctr, exp_code, devname, testname=""
     #print(strsend)
     r = requests.post(server,json=strsend)
     respjson = r.json()
+    #print("Response={}".format(respjson))
     resptype = respjson["Type"]
     if resptype == exp_code : 
         passcount = passcount + 1
     else :
         failcount = failcount + 1
-        #print("For {}, expected = {}. Actual = {}".format(testname, exp_code, resptype))
+        #print("Test = [{}], expected = {}. Actual = {}".format(testname, exp_code, resptype))
         failure_msg.append((exp_code, resptype))
     return failure_msg    
 

@@ -80,7 +80,6 @@ class EvtCoordinator(threading.Thread):
                 query_dict[HDR_FROM] = "localhost"
                 query_dict[HDR_DEVID] = config[CKEY_EVTCORD_HOST]
                 query_dict[HDR_KEY] = config[CKEY_EVTCORD_KEY]
-
                 query_dict[HDR_TARGET] = req_devid
                 query_dict[HDR_TIME] = req_time
                 devdetails = admgr.query(query_dict, get_key=True)

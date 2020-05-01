@@ -1,8 +1,10 @@
-import pymongo
+import pymongo, importlib
+importlib.import_module("testconstants")
+from testconstants import *
 
 print("Establishing DB Connection...")
 dbclient = pymongo.MongoClient("mongodb://localhost:27017/") 
-db = dbclient["mysiteion"]
+db = dbclient[SITEDB]
 coln = db["subscriptions"]
 coln.drop()
 subscriptions = [

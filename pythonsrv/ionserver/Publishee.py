@@ -131,7 +131,6 @@ class Publishee():
         else :
           reqd_paramvalue = lastresult[HDR_DATA][queryparam]
     return reqd_paramvalue
-
   # The right way is to club the below method with the get_latest_reading and 
   # return a list or a tuple. However as of this writing we don't have a robust
   # test suite for this and hence splitting 
