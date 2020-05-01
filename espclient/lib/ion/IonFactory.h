@@ -1,5 +1,5 @@
-#ifndef __CCSHFACTORY_H__
-#define __CCSHFACTORY_H__
+#ifndef __IONFACTORY_H__
+#define __IONFACTORY_H__
 
 #include "Log.h"
 #include "IonNode.h"

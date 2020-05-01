@@ -1,5 +1,5 @@
-#ifndef __CCSHNODE_H__
-#define __CCSHNODE_H__
+#ifndef __IONNODE_H__
+#define __IONNODE_H__
 #include <Arduino.h>
 #include "ionconstants.h"
 #include "IonThing.h"

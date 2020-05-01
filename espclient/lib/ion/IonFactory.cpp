@@ -128,9 +128,8 @@ Actuator IonFactory :: createActuator(const char* name, const char* action) {
 }
 
 void IonFactory :: run(){    
-    if (configuration -> isConfigEmpty()){ 
+    if (configuration -> isConfigEmpty())
         saveEntities() ; 
-    }
     
     BlinkType bt = NoBlink ; 
     bool isconnected = server -> connectToWifi((configuration -> getSsid()).c_str(), 
@@ -175,5 +174,4 @@ void IonFactory :: run(){
 
     }
     
-
 }

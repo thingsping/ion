@@ -28,7 +28,6 @@ public :
     bool isConfigValid() { return m_cfgvalid;}
     String getDeviceId(); 
     String getDeviceKey() ; 
-    void setDeviceId(String id) {devId = id; }
     void setDeviceKey(String devkey) ;  
     void setSsidDetails(String ssid, String password); 
     int getLogLevel() ;
@@ -36,7 +35,7 @@ public :
     String getServer() {return server; } 
     void setServer(String s) {server = s; }
     int getPollingPort(); // No set method for this - this can only be set using remote config
-    bool isLocalGateway(){return isLocalGw;};
+    bool isLocalGateway() {return isLocalGw;}
     void setLocalGateway(bool b){isLocalGw = b;}
     String getSsid() ; 
     String getSsidPassword() ; 

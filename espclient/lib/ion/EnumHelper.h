@@ -1,8 +1,7 @@
 #ifndef __ENUMHElPER_H__
 #define __ENUMHElPER_H__
-
-#include "Arduino.h"
 #include "ionconstants.h"
+#include "Arduino.h"
 
 class EnumHelper {
 public : 

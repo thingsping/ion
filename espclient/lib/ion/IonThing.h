@@ -1,5 +1,5 @@
-#ifndef __CCSHTHING_H__
-#define __CCSHTHING_H__
+#ifndef __IONTHING_H__
+#define __IONTHING_H__
 
 #include "Arduino.h"
 #include "ionconstants.h"

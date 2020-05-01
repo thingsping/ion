@@ -335,9 +335,8 @@ String IonNode :: getPublishJson() {
     for (int i = 0 ; i < allThings -> size(); i++) {
         const char* str1; 
         IonThing* thing = allThings -> get(i) ;
-        if (thing -> getNodeType() == SensorDevice){
+        if (thing -> getNodeType() == SensorDevice)
             dataJson.add(serialized(thing -> getReturnValuesJson()));
-        }
         yield();
     }
     String output; 
