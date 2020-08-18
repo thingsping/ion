@@ -165,13 +165,6 @@ credsdata = [
         "Name" : "Localhost querier", 
         "Type" : "Dummy", 
         "Owner" : None
-    },
-    {
-        "DevId" : "2cf4327a0021",
-        "Key" : "2cf4test!@#", 
-        "Name" : "Device for test - 1", 
-        "Type" : "Test", 
-        "Owner" : None
     }
     
 ]

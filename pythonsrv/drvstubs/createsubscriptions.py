@@ -96,7 +96,7 @@ subscriptions = [
                   },
         "Action" : [{ 
                      "Location" : "Front door", "Name" : "DoorLock", 
-                     "Parameters" : {"State" : True}
+                     "Parameters" : {"State" : True, "Pin" : 1343}
                    }]       
     },
     {

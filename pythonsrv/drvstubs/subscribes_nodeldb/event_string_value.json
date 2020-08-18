@@ -26,7 +26,7 @@
     "exp" : [
       {
           "Verify" : { 
-            "Nid": "Odev6", "Key" :"keyOdev6", "Type" : "CONTROL", "Data": [{"Location": "Front door", "Name": "DoorLock", "Action": "Unlock", "Parameters": {"State": true}}]
+            "Nid": "Odev6", "Key" :"keyOdev6", "Type" : "CONTROL", "Data": [{"Location": "Front door", "Name": "DoorLock", "Action": "Unlock", "Parameters": {"State": true, "Pin" : 1343}}]
           }, 
           "Exclude" : ["Mid", "Time", "From", "Ver"]
       }

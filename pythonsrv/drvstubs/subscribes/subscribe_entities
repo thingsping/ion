@@ -213,7 +213,9 @@
             "Data" : [
                 {  
                 "Name" : "DoorLock", "NodeType" : "OutputDevice", "Location" : "Front door",
-                "Parameters" :  {"State" : "Boolean"} ,  "Action" : "Unlock"
+                "Parameters" :  {"State" : "Boolean", 
+                   "Pin" : {"Type" : "Integer", 
+                     "ParameterRange" : [1000, 2000, 1]} } ,  "Action" : "Unlock"
                 }
             ], "ControlMethod" : "Poll"
         },
