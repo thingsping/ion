@@ -476,6 +476,42 @@ public :
     void addParameterDefinition(const char* name, float* returnVariable){
         addParameterDefinition(name, Float, (void*)returnVariable);}
 
+
+    /** Define a range for the parameter range. This method can only be called 
+     *  if the parameter with the specified name has a float value.This is
+     *  typically useful when designing a UI to input these values.  
+     *  @param name - The name of the parameter. This parameter must have been 
+     *  previously set using the addParameterDefinition. 
+     *  @param min - The minimum allowed value for this parameter
+     *  @param max - The maximum allowed value for this parameter
+     *  @param step - Each incremental value for the parameter. This is an 
+     *  optional parameter. If omitted or specified as zero, then there is no 
+     *  fixed step for each increment. 
+     *  @return true or false. True if a parameter has already been defined using
+     *  this name and the parameter type is Integer. Returns False if either the 
+     *  the parameter is not defined at all or if the parameter has been defined 
+     *  but the parameter type is not of Integer type
+     */
+    bool addParameterRange(const char* name, int min, int max, int step=0); 
+
+    /** Define a range for the parameter range. This method can only be called 
+     *  if the parameter with the specified name has an Integer value.This is
+     *  typically useful when designing a UI to input these values.  
+     *  @param name - The name of the parameter. This parameter must have been 
+     *  previously set using the addParameterDefinition. 
+     *  @param min - The minimum allowed value for this parameter
+     *  @param max - The maximum allowed value for this parameter
+     *  @param step - Each incremental value for the parameter. This is an 
+     *  optional parameter. If omitted or specified as zero, then there is no 
+     *  fixed step for each increment. 
+     * 
+     *  @return true or false. True if a parameter has already been defined using
+     *  this name and the parameter type is Integer. Returns False if either the 
+     *  the parameter is not defined at all or if the parameter has been defined 
+     *  but the parameter type is not of Integer type
+     */
+    bool addParameterRange(const char* name, float min, float max, float step=0.0); 
+
     bool setParameterValue(const char*, bool); 
     bool setParameterValue(const char*, int ); 
     bool setParameterValue(const char*, float ); 
@@ -519,6 +555,13 @@ private :
     LinkedList<const char*>* paramNames ; 
     LinkedList<ValueType>* paramTypes ;  
     LinkedList<void*>* paramVariables ; 
+
+    // The first linked list below is a duplicate because paramNames already has 
+    // references to the names. However if we want to use it then we'll have to 
+    // fill up each paramRanges linked list with some value even if that param 
+    // doesn't have a range definition. So duplicating is a safer bet!
+    LinkedList<const char*>* paramRangeNames ;
+    LinkedList<void*>* paramRanges ; 
 
     void init(NodeType nt, const char* name, String loc); 
     int findString(LinkedList<const char*>*, const char*); 

@@ -48,6 +48,8 @@ void IonThing :: init(NodeType nt, const char* name, String loc) {
     paramNames = new LinkedList<const char*>();
     paramTypes = new LinkedList<ValueType>();
     paramVariables = new LinkedList<void*>() ; 
+    paramRangeNames = new LinkedList<const char*>();
+    paramRanges = new LinkedList<void*>(); 
 }
 
 void IonThing :: setAction(const char* action) {
@@ -79,7 +81,61 @@ void IonThing :: addParameterDefinition(const char* name, ValueType valtype,
     paramNames -> add(name); 
     paramTypes -> add(valtype); 
     paramVariables -> add(paramVariable); 
+}
 
+bool IonThing :: addParameterRange(const char* skey, int min, int max, int step){
+    bool success = false; 
+    int idx = findString(paramNames, skey);
+    if (idx >=0){
+        if (paramTypes -> get(idx) == Int ||
+                paramTypes -> get(idx) == Float){
+            int* rng; 
+            rng = (int*)malloc(3*sizeof(int)); 
+            rng[0] = min;
+            rng[1] = max;
+            rng[2] = step; 
+
+            paramRangeNames -> add(skey); 
+            paramRanges -> add(rng);
+            logger -> debug("Adding parameter range-[", String(rng[0]), ",",
+                String(rng[1]), "," + String(rng[2]) + "]"); 
+            success = true ; 
+        }else {
+            logger -> error("Parameter found but not of numeric type"); 
+            success = false ; 
+        }
+    }else {
+        logger -> error("No Parameter with given name has been defined"); 
+        success = false ; 
+    }    
+    return success ; 
+}
+
+bool IonThing :: addParameterRange(const char* skey, float min, float max, float step){
+    bool success = false; 
+    int idx = findString(paramNames, skey);
+    if (idx >=0){
+        if (paramTypes -> get(idx) == Float){
+            float* rng; 
+            rng = (float*)malloc(3*sizeof(float)); 
+            rng[0] = min;
+            rng[1] = max;
+            rng[2] = step; 
+
+            paramRangeNames -> add(skey); 
+            paramRanges -> add(rng);
+            logger -> debug("Adding parameter range-[", String(rng[0]), ",",
+                String(rng[1]), "," + String(rng[2]) + "]"); 
+            success = true ; 
+        }else {
+            logger -> error("Parameter found but not of float type"); 
+            success = false ; 
+        }
+    }else {
+        logger -> error("No Parameter with given name has been defined"); 
+        success = false ; 
+    }    
+    return success ; 
 }
 
 bool IonThing :: setParameterValue(const char* skey, bool value){
@@ -155,9 +211,27 @@ String IonThing :: getParameterDefinitionsJson() {
             }
             params.concat("\""); 
             params.concat (paramNames ->get(i));
+            params.concat("\":{");            
+            int idx = findString(paramRangeNames, paramNames ->get(i));
+            params.concat("\"");
+            params.concat(HDRTYPE);
             params.concat("\":\"");
             params.concat(EnumHelper :: getValueTypeString(paramTypes->get(i)));
             params.concat("\"");
+            if (idx >= 0){
+                params.concat(",\"");
+                params.concat (HDRPARAMRANGE); 
+                params.concat("\":[");
+                int* curRange = (int*) paramRanges -> get(idx);
+                params.concat(curRange[0]);
+                params.concat(",");
+                params.concat(curRange[1]);
+                params.concat(",");
+                params.concat(curRange[2]);
+                params.concat("]}");                
+            }else {
+                params.concat("}");
+            }
         }
         params.concat("}");
     } else {

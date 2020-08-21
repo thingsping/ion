@@ -16,6 +16,7 @@
 #define HDRACTION "Action"
 #define HDRCAPABILITIES "Capabilities"
 #define HDRPARAMS "Parameters"
+#define HDRPARAMRANGE "ParameterRange"
 #define HDRRETURN "Return"
 #define HDRCONTROLMETHOD "ControlMethod"
 #define CONTROLMETHODPOLL "Poll"
@@ -33,6 +34,7 @@
 #define TYPECTL "Control"
 #define TYPECFG "GETCONFIG"
 #define TYPECTLPOLL "POLLCONTROL"
+#define TYPERESTART "RESTART"
 
 #define RESPONSEINVALID 0
 #define RESPONSEOK 200

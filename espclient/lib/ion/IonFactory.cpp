@@ -116,9 +116,11 @@ Actuator IonFactory :: createActuator(String name, const char* action) {
     return createActuator(new_name, action) ; 
 }
 
-Actuator IonFactory :: createActuator(const char* name, const char* action) {
-  
+Actuator IonFactory :: createActuator(const char* name, const char* action) {  
     String loc =configuration -> getLocation(name);
+    if (loc.equals("")){
+        logger -> error("Location is blank! Has the entity been defined in the configuration?");
+    }
     String tag = configuration -> getTag(name) ;  
     Actuator * act = new Actuator(name, loc,  action);
     act -> setTag(tag);
