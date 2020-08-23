@@ -96,6 +96,11 @@ class DBManager():
         return coln.drop()
 
     @staticmethod
+    def dropGlobal(colnname):
+        coln = DBManager.getGlobalCollection(colnname)
+        return coln.drop()
+
+    @staticmethod
     def find_first(colnname, filter):
         #print ("Filter = {}".format(filter))
         coln = DBManager.getCollection(colnname)

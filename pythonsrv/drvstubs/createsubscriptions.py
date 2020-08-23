@@ -17,6 +17,15 @@ subscriptions = [
         "Action" : [{ 
                      "Location" : "Bedroom", "Name" : "Light#2", "Parameters" : {"State": True}
                    }]    
+    },{
+        "Creator" : "evt-cfgator", 
+        "Event" : { 
+                    "Location" : "Bedroom", "Name" : "LightSensor1", "Parameter" : "LightLevel", 
+                    "Condition" : ">", "CondValue" : 3
+                  },
+        "Action" : [{ 
+                     "Location" : "Bedroom", "Name" : "Light#2", "Parameters" : {"State": False}
+                   }]    
     },
     {
         "Creator" : "evt-cfgator", 

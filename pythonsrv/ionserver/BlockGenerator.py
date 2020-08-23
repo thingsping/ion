@@ -119,6 +119,10 @@ def blocklyFromJson(jsdata, isFromDb=False):
                 if paramTypesStr != "[" :
                     paramTypesStr += ", "
                 paramType = dataJson[name]
+                if (type(paramType) is dict) : 
+                    paramType = paramType[HDR_TYPE]
+                # else : we'll assume that the type is a string. 
+
                 if paramType == "Str" :
                     paramType = "String"
                 if paramType == "Float" or paramType == "Int" or paramType == "Integer" :

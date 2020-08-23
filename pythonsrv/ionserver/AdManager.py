@@ -24,7 +24,6 @@ __date__ = "$June 24, 2019 "
 from .constants import * 
 from .DBManager import DBManager
 from .Registrar import Registrar
-from .FirebaseManager import FirebaseManager
 from .IonExceptions import * 
 import copy, json, time
 
@@ -46,7 +45,6 @@ class AdManager():
         #self._adscoln = DBManager.getCollection(DB_ADS_COLN)
         self._reg = Registrar.getRegistrar()
         self._status = None
-        self._fbmgr = FirebaseManager.get_manager()
         self._pubmgr = None
 
     def post_ad(self, adkeys):
@@ -95,7 +93,6 @@ class AdManager():
             DBManager.replace_one(DB_ADS_COLN, dbdict, filter)
             self._status[HDR_TYPE] = STATUS_ACCEPTED_CODE
             self._status[HDR_RESPONSECLAUSE] = STATUS_ACCEPTED
-            self._fbmgr.update(dbdict, TYPE_AD)
             self._status[HDR_FROM] = get_self_address()
         self._status[HDR_TIME] = req_time
 
@@ -161,6 +158,28 @@ class AdManager():
         self._status[HDR_FROM] = get_self_address()
         self._status[HDR_TIME] = req_time
         return self._status
+
+    def addActuatorState(self, inctlmsg):
+        #print("Received Actuator state update. Json=({})".format(inctlmsg))
+        # Without the next line, the original calling json gets messed up
+        # and bad things happen in the HTTPSender class
+        ctlmsg = copy.deepcopy(inctlmsg)
+        devid = ctlmsg[HDR_DEVID]
+        ctldata = ctlmsg[HDR_DATA]
+        #print("In data={}".format(ctldata))
+        for item in ctldata:
+            statesjson = {}
+            devname = item[HDR_NAME]            
+            devloc = self.get_location(devname, devid)
+            item[HDR_LOCATION] = devloc
+            item[DBHDR_DEVID] = devid
+
+            devStates = DBManager.find_one(DB_DEVICESTATES_COLN, {HDR_NAME : devname, HDR_LOCATION : devloc})
+            if devStates is not None : 
+                #print("Deleting previous state to create afresh")
+                DBManager.delete_many(DB_DEVICESTATES_COLN, {HDR_NAME : devname, HDR_LOCATION : devloc})
+            print("Now inserting in device states - {}".format(item))
+            DBManager.insert_one(DB_DEVICESTATES_COLN, item)
 
     def get_deviceid(self, devname, devloc):
         filter = { "{}.{}".format(HDR_DATA, HDR_NAME) : devname , 
@@ -240,65 +259,3 @@ class AdManager():
     def response(self) :
         strret = json.dumps(self._status, skipkeys=True)
         return  strret 
-
-'''
-FOR QUERIES : 
-  Request:
- {
-   “Ver” : “0.5”, “Mid” : “A_UNIQUE_VALUE”, 
-   “Type” : “QUERY”,  “From” : “SELF_ADDRESS”,
-    “Nid”  : “Device ID of the entity sending the message”,
-    “TargetId” : “DEVICE_ID of Target", 
-    “Time” : node's_time
-  }
-Response : 
-“Type” : “200” 
-      “Ver” : “0.5”
-      “From” : “Address of server”
-      “Mid” : MID Sent in original request
-      “Time” : server's_time
-      “Data” : ...
-
-In the above request  Retained for Response are : 
-  Ver, Mid
-
-Following will be modified :
-    “Type” : “200”  (or 404)
-    “From” : “Address of server”
-    “Time” : server's_time
-
-Following are new : 
-    "RespClause" : 
-    A new header called "Data" has to be added for each 
-    discovery. It will have a Json with :
-        "Nid" : Copy from NID of Request 
-        "Contact" : Get from registration db
-        "Expires" : Get from registration db 
-        "Capabilities" : Get from Advertisement DB
-
-Remove from Request 
-   "TargetId" : After copying into Data 
-   "Nid"
-
-'''
-
- 
-'''
-{ 
-    
-    “Type” : “ADVERTISE” , “Ver” : “0.5”, “From” : “10.1.1.102”,
-         “Nid” : “Idev2”, 
-         “Mid” : “Idev2002”, 
-         “Time” : 55343213711, 
-         “Key” : “0a2468f2c5c6d69621afd7bedd3744d4”, 
-         “Data” :  
-             { “Name” : “TemperatureSensor”, “NodeType” : “Sensor”, 
-               “Location” : “Bedroom”,
-               “Capabilities” :[“Read Temperature”, “Read Humidity”], 
-               “Parameters” : {“isFaranheit”: “Boolean”}, 
-               “Return” : {“Temperature” : “Float”, 
-                  “Humidity” : “Float”, “HeatIndex” : “Float” }
-             }
-      }
-
-'''

@@ -11,7 +11,7 @@
         "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
         "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
         "Key" : "keyIdev1", 
-        "Data" : [{ "Name" : "LightSensor1",  "LightLevel" : 4 }]
+        "Data" : [{ "Name" : "LightSensor1",  "LightLevel" : 3 }]
     }
   },
   {

@@ -7,6 +7,9 @@
     }
   },
   {
+    "dbdrop" : {"db" : "Common", "Collection" : "controlpoll"}
+  },
+  {
       "iondata" : {
         "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
         "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
@@ -33,6 +36,9 @@
           "Exclude" : ["Mid", "Time", "From", "Ver"]
       }
     ]
+  },
+  {
+    "sleep" : 1
   },
   {
     "iondata" :{

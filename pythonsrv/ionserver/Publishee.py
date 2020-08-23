@@ -26,7 +26,6 @@ from .DBManager import DBManager
 from .Registrar import Registrar
 from .AdManager import AdManager
 from .EvtCoordinator import EvtCoordinator
-from .FirebaseManager import FirebaseManager
 import copy, time, json
 
 class Publishee():
@@ -46,8 +45,7 @@ class Publishee():
   def __init__(self): 
     self._status = None
     self._reg = Registrar.getRegistrar()
-    self._status = None
-    self._fbmgr = FirebaseManager.get_manager()
+    self._status = None    
     self._admgr = AdManager.get_AdManager()
 
   def receive_data(self, pubkeys):
@@ -92,7 +90,6 @@ class Publishee():
         tempdict = {} 
         tempdict[DBHDR_DEVID] = devid
         tempdict[HDR_DATA] = pubdata_arr
-        self._fbmgr.update(tempdict, TYPE_PUB)
 
         for pubdata in pubdata_arr :
           db_dict[HDR_NAME] = pubdata[HDR_NAME]

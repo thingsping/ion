@@ -17,19 +17,30 @@
  *
  */
  '''
-try :
-    from .constants import * 
-except :
-    from constants import * 
 
-config = {
-    CKEY_DBNAME : "mysiteion",
-    CKEY_MODULENAME : "ionserver", 
-    CKEY_SELF_IP : "put_server_address_here",
-    CKEY_BASEPATH : "/var/www/html/ionserver", 
-    CKEY_SERVERFQDN : "FQDN_of_server",
-    CKEY_POLLRESPPORT : 10560, 
-    CKEY_EVTCORD_HOST : "evtcoordinator-localhost" ,
-    CKEY_EVTCORD_KEY : "evtc#loc@12$#1"
+__author__ = "raghu"
+__date__ = "$August 22, 2020 "
 
-}
+import time
+
+class ControlData:
+    def __init__(self, controldata, uid=None, updateFB = True, updateDB = True): 
+        self._ctldata = controldata
+        self._isFbUpdateRequired = updateFB
+        self._isDbUpdateRequired = updateDB
+        if (uid is None):
+            self._uniqueId = "ctl-{}".format(time.time())
+        else :
+            self._uniqueId = uid
+
+    def getUID(self):
+        return self._uniqueId
+
+    def getControlData(self):
+        return self._ctldata
+
+    def isFbUpdateRequired(self):
+        return self._isFbUpdateRequired
+
+    def isDbUpdateRequired(self):
+        return self._isDbUpdateRequired

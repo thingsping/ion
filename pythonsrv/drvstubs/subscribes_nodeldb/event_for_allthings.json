@@ -2,7 +2,7 @@
   {
     "meta" : {
       "Name" : "Test POLLCONTROL when for publish matching all things", 
-      "Desc" : "We have a device that has two different sensor things - say thing1 and thing2.  we first send a publish message such that it matches an event-action relationship of 'thing1'. We then send a publish message such that it matches an event-action relationship of 'thing2'. We then send a POLLCONTROL message to query for the device. Verify that we get back data for only the correct event",
+      "Desc" : "We have a device that has two different sensor things - say thing1 and thing2.  we first send a publish message such that it matches an event-action relationship of 'thing1'. We then send a publish message such that it matches an event-action relationship of 'thing2'. We then send a POLLCONTROL message to query for the device. Verify that we get back data for only the first event. Immediately after this, we send back another POLLCONTROL message. This time we get back hte CONTROL message that corresponds to the second publish message. ",
       "Precondition"  : "./subscribe_entities.json"
     }
   },
@@ -38,7 +38,26 @@
       {
           "Verify" : { 
             "Nid": "Odev1", "Key" :"keyOdev1", "Type" : "CONTROL", "Data": [
-              {"Location": "Bedroom", "Name": "Music Player", "Action": "Play", "Parameters": {"Sound Track": "lullaby.mp3"}},
+              {"Location": "Bedroom", "Name": "Music Player", "Action": "Play", "Parameters": {"Sound Track": "lullaby.mp3"}}
+            ]
+          }, 
+          "Exclude" : ["Mid", "Time", "From", "Ver"]
+      }
+    ]
+  },
+  {
+    "sleep" : 1
+  },
+  {
+    "iondata" :{
+      "Type" : "POLLCONTROL", "Ver" : "0.8", "From" : "10.1.1.28",
+      "Nid" : "Odev1", "Mid" : "Odev1_ctl_001", "Time" : "$rtime", 
+      "Key" : "keyOdev1"
+    }, 
+    "exp" : [
+      {
+          "Verify" : { 
+            "Nid": "Odev1", "Key" :"keyOdev1", "Type" : "CONTROL", "Data": [
               {"Location": "Bedroom", "Name": "Light#2", "Action": "Switch", "Parameters": {"State": true}}
             ]
           }, 

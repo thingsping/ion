@@ -2,7 +2,7 @@
   {
     "meta" : {
       "Name" : "Test POLLCONTROL which triggers multiple times", 
-      "Desc" : "First we send a publish message such that it matches an event-action relationship. We repeat similar publish messsages which would trigger the action multiple times. We Then send a POLLCONTROL message and confirm that we get back a CONTROL message. The returned CONTROL message will have only one Action - as there is no meaning in duplicates",
+      "Desc" : "First we send a publish message such that it matches an event-action relationship. We repeat similar publish messsages which would trigger an action on the same output device. The parameter values for the output device will be different. We Then send a POLLCONTROL message and confirm that we get back a CONTROL message. The returned CONTROL message will have only one Action - which corresponds to the last publish message",
       "Precondition"  : "./subscribe_entities.json"
     }
   },
@@ -35,7 +35,7 @@
       "Type" : "PUBLISH" , "Ver" : "0.8", "From" : "10.1.1.18",
       "Nid" : "Idev1", "Mid" : "Idev1004", "Time" : "$time", 
       "Key" : "keyIdev1", 
-      "Data" : [{ "Name" : "LightSensor1",  "LightLevel" : 0 }]
+      "Data" : [{ "Name" : "LightSensor1",  "LightLevel" : 4 }]
     }
   },
   {
@@ -51,7 +51,7 @@
       {
           "Verify" : { 
             "Nid": "Odev1", "Key" :"keyOdev1", "Type" : "CONTROL", "Data": [
-              {"Location": "Bedroom", "Name": "Light#2", "Action": "Switch", "Parameters": {"State": true}}
+              {"Location": "Bedroom", "Name": "Light#2", "Action": "Switch", "Parameters": {"State": false}}
             
             ]
           }, 

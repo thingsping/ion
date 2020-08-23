@@ -45,7 +45,6 @@ if (is_from_module != "True") :
 else :
   from .constants import *
   from .userconfig import config
-  os.environ[OSKEY_FBSERVICEFILE] = "./{}".format(config[CKEY_FBSERVICEFILE]) 
   print("Running as a local python module for {}".format(config[CKEY_SERVERFQDN]))
   
 
@@ -54,12 +53,12 @@ else :
 
 from flask import Flask, abort, request
 import json, time
+from .CredsManager import CredsManager
 from .Registrar import Registrar
 from .AdManager import AdManager
 from .Publishee import Publishee
-from .HttpSender import HttpSender
 from .DBManager import DBManager
-from .HttpSender import HttpSender
+from .ControlProcessor import ControlProcessor
 from .constants import *
 from .userconfig import config
 
@@ -151,21 +150,11 @@ def receive():
     pub.receive_data(msg)
     retstring = pub.response() 
   elif (reqtype == TYPE_CTL and isLocal):
-    tgturl = "http://{}".format(target)
-    print("Send to {} -\n{}".format(tgturl, msg))
-    threadname =  "ctlsender-{}-{}".format(HDR_MSGID, int(time.time()))
-    sender = HttpSender(name = threadname)
-    sender.setParameters("http://{}".format(target), msg)
-    sender.start()
-    sender.join()
-    retstring = sender.get_response(threadname)
+    ctlproc = ControlProcessor.get_processor()
+    retstring = ctlproc.addControlMessage(msg, msg[HDR_MSGID], False, False)
   elif (reqtype == TYPE_CTLPOLL):
-    threadname = "ctlpoll-{}-{}".format(HDR_MSGID, int(time.time()))
-    sender = HttpSender(name = threadname )
-    ## In this case we don't care about setting the parameters 
-    ## for the HttpSender class
-    retstring = sender.process_poll_request(msg)
-
+    ctlproc = ControlProcessor.get_processor()
+    retstring = ctlproc.process_poll_request(msg)
   elif (reqtype == TYPE_SAVEBLOCKLY and referrer==get_self_address()):
     del msg[HDR_TYPE]
     #print("Now going to save blockly config - {}".format(msg))

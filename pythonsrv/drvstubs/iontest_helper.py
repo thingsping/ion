@@ -1,4 +1,4 @@
-import importlib, time, requests,copy, json, pymongo, argparse, os
+import importlib, time, requests,copy, json, pymongo, argparse, os, pymongo
 
 importlib.import_module("testconstants")
 from testconstants import *
@@ -258,6 +258,19 @@ def test_file(server, regfile, notestcount=False):
                 elif ("sleep" in item):
                     sltime = item["sleep"]
                     time.sleep(sltime)
+                elif ("dbdrop" in item):
+                    dbparams = item["dbdrop"]
+                    dbtype = dbparams["db"]
+                    if (dbtype == "Common"):
+                       dbtype = COMMONDB
+                    else :
+                        dbtype = SITEDB
+                    cname = dbparams["Collection"]
+                    print("Will drop DB={}.{}".format(dbtype, cname))
+                    dbclient = pymongo.MongoClient("mongodb://localhost:27017/") 
+                    dbclient = dbclient[dbtype]
+                    coln = dbclient[cname]
+                    coln.drop()
                 
 
         elif (type(data) is dict):
