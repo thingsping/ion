@@ -16,7 +16,7 @@ These credentials are directly inserted into the database.
 
 
 ================================
-2. test_registrations.py
+2. testconstants.py
 ================================
 Open the file test_registrations.py and change the value of 
     srv_addr="http://172.21.20.106:5000"
