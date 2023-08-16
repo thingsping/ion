@@ -14,6 +14,3 @@ Python implementation of an IONMP compliant server. This server implements most 
   - Instead of the standard SUBSCRIBE, NOTIFY, in this server we use a technique where event-action relationships (which achieves the core functionality of SUBSCRIBE / NOTIFY) is embedded into the server code itself. 
 - BLOCKLY based event-action configuration
   - We intend to push this into the repository as soon as we have the first set of client implementations / examples ready. 
-
-## espclient ##
-Work in progress - library and reference implementations for ION compliant endpoints that use the ESP8266 / ESP32 
